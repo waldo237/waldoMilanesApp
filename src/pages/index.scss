@@ -162,7 +162,7 @@
         }
           .wm-img {
             background: 
-            url("../static/waldo.jpg") no-repeat center;
+            url("../images/waldo.jpg") no-repeat center;
             background-position: cover;
             background-size: 140px;
             width: 135px;
@@ -303,7 +303,7 @@
       align-items: center;
       justify-items: center;
       text-align: center;
-      h2, p{
+      h5, p{
         margin-bottom: 0px;
       }
       @include bp(mid-phone){
@@ -422,9 +422,9 @@
       padding: 30px 5px;
       right: 98%;
       width: 90vw;
-      h2,
-      h4,
       h5,
+      h3,
+      h4,
       p {
         margin: 0px;
         padding: 0px;
@@ -446,9 +446,10 @@
       align-items: flex-end;
       justify-items: flex-end;
       padding: 20px 0px;
-      h5{
+      h3{
         padding: 0px 0px;
         margin: 0px;
+        font-size: .8em;
       }
       // 
       @include bp(desktop){

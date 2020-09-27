@@ -20,7 +20,7 @@ import Loading from "./src/components/Loading/Loading";
   )
 }
 
-// gatsby-browser.js
+
 const shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition
@@ -33,4 +33,17 @@ const shouldUpdateScroll = ({
   return true;
 };
 
-export {wrapRootElement, shouldUpdateScroll}
+ const onServiceWorkerUpdateReady = () => {
+  const answer = window.confirm(
+    `This application has been updated. ` +
+      `Reload to display the latest version?`
+  )
+  if (answer === true) {
+    window.location.reload()
+  }
+}
+
+ const registerServiceWorker = () => true
+
+
+export {wrapRootElement, shouldUpdateScroll, onServiceWorkerUpdateReady, registerServiceWorker}

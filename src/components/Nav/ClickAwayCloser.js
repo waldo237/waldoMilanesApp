@@ -17,19 +17,24 @@ const ClickAwayCloser = ({ children, exceptionById }) => {
         const clickAwayHandler = () => {
             const handleClickOutside = (event) => {
                 if (exceptionById) {
+                    if (typeof window !== `undefined`) {
                     const excludedElement = document.getElementById(exceptionById);
                     if (ref.current && !ref.current.contains(event.target)
                         && !ref.current.contains(excludedElement)) {
                         classToggler(ref);
                     }
-
+                }
                 } else if (ref.current && !ref.current.contains(event.target)) {
                     classToggler(ref);
                 }
             }
+            if (typeof window !== `undefined`) {
             document.addEventListener("mousedown", handleClickOutside);
+            }
             return () => {
+                if (typeof window !== `undefined`) {
                 document.removeEventListener("mousedown", handleClickOutside);
+                }
             };
         }
         if (exceptionById) {
@@ -50,6 +55,7 @@ ClickAwayCloser.defaultProps = {
     exceptionById: ''
 }
 const removeDisplayNone = (id) => {
+    if (typeof window !== `undefined`) {
     const hiddenelements = document.querySelectorAll('.display-none');
     hiddenelements.forEach((elem) => {
       if (elem.children[0].id === id) {
@@ -60,5 +66,6 @@ const removeDisplayNone = (id) => {
       };
     })
   }
+}
 
 export {ClickAwayCloser, removeDisplayNone}

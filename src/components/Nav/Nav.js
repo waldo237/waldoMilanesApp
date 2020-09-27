@@ -11,7 +11,7 @@ import { Context } from '../../store/store'
 import bannerImg from "../../static/banner.png";
 import Settings from '../Dashboard/Settings';
 import Dashboard from '../Dashboard/Dashboard';
-import {ClickAwayCloser, removeDisplayNone} from './ClickAwayCloser'
+import { ClickAwayCloser, removeDisplayNone } from './ClickAwayCloser'
 import ListWithNavItems from "./ListWithNavItems";
 import { uuidv4 } from '../gobalUtil'
 import SettingBtn from "./SettingBtn";
@@ -41,71 +41,82 @@ const Navigation = () => {
   ];
 
   const triggerToggleSideMenu = (value) => {
-    const container = document.querySelector('.nav-items-container');
-    if (!value && container) {
-      const timer = setTimeout(() => {
-        toggleSideMenu(value)
-      }, 300);
-      container.style.animation = ' slideOutRightx 0.3s cubic-bezier(0.47, 0, 0.745, 0.715)';
-      return () => clearTimeout(timer);
-    }
+    if (typeof window !== `undefined`) {
+      const container = document.querySelector('.nav-items-container');
+      if (!value && container) {
+        const timer = setTimeout(() => {
+          toggleSideMenu(value)
+        }, 300);
+        container.style.animation = ' slideOutRightx 0.3s cubic-bezier(0.47, 0, 0.745, 0.715)';
+        return () => clearTimeout(timer);
+      }
 
-    return toggleSideMenu(value);
+      return toggleSideMenu(value);
+    }
   }
 
   // turn icon .rotate and .closable
   const openInnerList = () => {
-    const icon = document.querySelector(".drop-icon");
-    const innerItems = document.querySelector(".inner-nav-item-list");
-    icon.classList.toggle("rotate");
-    innerItems.classList.toggle("closable");
+    if (typeof window !== `undefined`) {
+      const icon = document.querySelector(".drop-icon");
+      const innerItems = document.querySelector(".inner-nav-item-list");
+      icon.classList.toggle("rotate");
+      innerItems.classList.toggle("closable");
+    }
   };
 
- 
+
 
 
   useEffect(() => {
-    const nav = document.getElementById("navbar");
-    const navOriginalPositioin = nav.offsetTop;
-    const makeNavSticky = () => {
-      if (window.pageYOffset > navOriginalPositioin) {
-        nav.classList.add("sticky");
-        nav.classList.remove("stuck");
-      } else {
-        nav.classList.remove("sticky");
-        nav.classList.add("stuck");
-      }
-    };
-    window.onscroll = () => makeNavSticky();
-
-    const activateSideNav = () => {
-      if (document.body.clientWidth >= 800) {
-        toggleSideMenu(true);
-      } else {
-        toggleSideMenu(false);
-      }
-    };
-    activateSideNav();
-    window.addEventListener("resize", activateSideNav);
-
-    // make the nav colapse if click away.
-    document.addEventListener("click", (evt) => {
-      if (document.body.clientWidth <= 800) {
-        const navElem = document.getElementById("nav");
-        const innerNav = document.querySelector(".nav-item-with-children-span");
-        let targetElement = evt.target;
-        do {
-          if (
-            targetElement === navElem ||
-            targetElement === innerNav
-          ) {
-            return;
+    if (typeof window !== `undefined`) {
+      const nav = document.getElementById("navbar");
+      const navOriginalPositioin = nav.offsetTop;
+      const makeNavSticky = () => {
+        if (window.pageYOffset > navOriginalPositioin) {
+          nav.classList.add("sticky");
+          nav.classList.remove("stuck");
+        } else {
+          nav.classList.remove("sticky");
+          nav.classList.add("stuck");
+        }
+      };
+      window.onscroll = () => makeNavSticky();
+    }
+      const activateSideNav = () => {
+        if (typeof window !== `undefined`) {
+          if (document.body.clientWidth >= 800) {
+            toggleSideMenu(true);
+          } else {
+            toggleSideMenu(false);
           }
-          targetElement = targetElement.parentNode;
-        } while (targetElement);
-        triggerToggleSideMenu(false);
+        }
+      };
+      activateSideNav();
+      if (typeof window !== `undefined`) {
+        window.addEventListener("resize", activateSideNav);
       }
-    });
+    
+    // make the nav colapse if click away.
+    if (typeof window !== `undefined`) {
+      document.addEventListener("click", (evt) => {
+        if (document.body.clientWidth <= 800) {
+          const navElem = document.getElementById("nav");
+          const innerNav = document.querySelector(".nav-item-with-children-span");
+          let targetElement = evt.target;
+          do {
+            if (
+              targetElement === navElem ||
+              targetElement === innerNav
+            ) {
+              return;
+            }
+            targetElement = targetElement.parentNode;
+          } while (targetElement);
+          triggerToggleSideMenu(false);
+        }
+      });
+    }
   }, [])
 
   return (
@@ -132,17 +143,17 @@ const Navigation = () => {
         ? (
           <div className="nav-items-main-wrapper">
             <div className="nav-items-container  primary">
-    
+
               <ul className="nav-items-list" id="nav-items-list">
                 {navItems.map((navItem) => (
-                  
+
                   <div key={navItem.id}>
                     <AvatarContainer navItem={navItem} state={state} removeDisplayNone={removeDisplayNone} />
                     <ListWithNavItems item={navItem} openInnerList={openInnerList} isLoggedIn={state.isLoggedIn} />
-                    <SettingBtn navItem={navItem} isLoggedIn={state.isLoggedIn} removeDisplayNone={removeDisplayNone} /> 
+                    <SettingBtn navItem={navItem} isLoggedIn={state.isLoggedIn} removeDisplayNone={removeDisplayNone} />
 
                   </div>
-               
+
                 )
                 )}
 
@@ -155,13 +166,13 @@ const Navigation = () => {
 
       {(state.isLoggedIn)
         ? (
-          <ClickAwayCloser exceptionById='avatar-wrapper'> 
-            <Dashboard removeDisplayNone={removeDisplayNone} /> 
+          <ClickAwayCloser exceptionById='avatar-wrapper'>
+            <Dashboard removeDisplayNone={removeDisplayNone} />
           </ClickAwayCloser>
-)
+        )
         : null}
-      <ClickAwayCloser exceptionById='setting-btn'> 
-        <Settings /> 
+      <ClickAwayCloser exceptionById='setting-btn'>
+        <Settings />
       </ClickAwayCloser>
     </nav>
   );

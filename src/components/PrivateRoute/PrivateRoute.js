@@ -7,14 +7,14 @@ import { Context } from "../../store/store";
 const PrivateRoute = ({ children}) => {
     const [state] = useContext(Context);
     
+    if (typeof window !== `undefined`) {
     useEffect(() => {
-
       if (!state.isLoggedIn && location.pathname !== `/followers`) {
         navigate("/followers")
       }
    
     }, [state.isLoggedIn, location])
-
+  }
 
   return (
     (state.isLoggedIn)

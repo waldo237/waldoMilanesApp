@@ -4,6 +4,7 @@ import envURL from '../envURL';
 import './singleArticle.scss'
 import CommentBox from '../components/comments/CommentBox';
 import { Context } from '../store/store';
+import SEO from '../components/seo';
 
 const SingleArticle =({location})=>{
   const [state, dispatch] = useContext(Context);  
@@ -18,16 +19,22 @@ const SingleArticle =({location})=>{
   }
     useEffect(() => { 
       setData(state.selectedArticle);
-      document.title = state.selectedArticle.title;
+ 
     })
     useEffect(() => {
-        document.title = `One of my articles.`;
+    
         fetchSelectedArticle();
     
       }, [updated,location.pathname, location.search]);
 
     return (
       <>
+      
+        <SEO 
+          title={`A post written by Waldo milanes - ${state.selectedArticle.title}`}
+          description={state.selectedArticle.body}
+          image={state.selectedArticle.photo}
+        />
         <main className='single-article-container light'>
           {(articleData)? (
            

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import { Trans } from 'react-i18next'
 import Reducer from './Reducer'
 
-const initialLang = localStorage.getItem('language');
+let initialLang = ''
+if (typeof window !== `undefined`) {
+   initialLang = localStorage.getItem('language');
+}
 const initialState = {
     articles: [],
     selectedArticle: {},

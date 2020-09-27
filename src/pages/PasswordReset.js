@@ -18,7 +18,9 @@ const PasswordResetInit = () =>{
     const [user] = useState({});
     
     useEffect(() => {
+      if (typeof window !== `undefined`) {
       document.title = "Password reset";
+      }
     }, []);
     
     const inputHandler = (event) => {

@@ -24,6 +24,7 @@ const MoreAboutMe = () => {
     },
   ]
   useEffect(() => {
+    if (typeof window !== `undefined`) {
     const moreAboutMe = document.querySelectorAll(".lazy-effect");
     moreAboutMe.forEach((item) => {
       const observer = new IntersectionObserver((entries) => {
@@ -33,6 +34,7 @@ const MoreAboutMe = () => {
       });
       observer.observe(item);
     }, { rootMargin: "100px" })
+  }
   })
   return (
     <article id="more-about-me-container" className="light primary--text">

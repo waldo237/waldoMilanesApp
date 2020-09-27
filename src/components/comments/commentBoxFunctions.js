@@ -4,8 +4,10 @@ import { getTokenFromLocalStorage } from "../gobalUtil";
 import commentValidator from "./commentValidator";
 
 const clearCommentInput = () => {
+  if (typeof window !== `undefined`) {
   document.getElementById('comment-input')
     .value = '';
+  }
 }
 /**
  * @function saveComment posts new rating to the server.

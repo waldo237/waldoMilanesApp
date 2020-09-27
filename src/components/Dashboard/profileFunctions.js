@@ -161,6 +161,7 @@ const cancelAccount = (options) => {
  *
  */
 const setEndOfContenteditable = (contentEditableElement) => {
+  if (typeof window !== `undefined`) {
   let range;
   let selection;
   if (document.createRange) {
@@ -177,6 +178,7 @@ const setEndOfContenteditable = (contentEditableElement) => {
     range.collapse(false);
     range.select();
   }
+}
 }
 
 /**
@@ -225,9 +227,12 @@ const validateBlob = (blob) => {
  * @param {*} base64 the base64
  */
 const compressImage =(base64) => { 
-  const canvas = document.createElement('canvas')
-  const img = document.createElement('img')
-
+  let canvas = null
+  let img = null
+  if (typeof window !== `undefined`) {
+   canvas = document.createElement('canvas')
+   img = document.createElement('img')
+  }
   return new Promise((resolve, reject) => {
     img.onload = () =>{
       let {width} = img

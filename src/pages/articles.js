@@ -24,6 +24,7 @@ const Articles = () => {
  }
   // const [articles, setData] = useState([]);
   useEffect(()=>{
+    if (typeof window !== `undefined`) {
     const moreAboutMe = document.querySelectorAll(".lazy-effect");
     moreAboutMe.forEach((item)=>{
         const observer = new IntersectionObserver((entries) => {
@@ -33,6 +34,7 @@ const Articles = () => {
         }, );
         observer.observe(item);
     }, {  rootMargin: "100px" })
+  }
 });
   useEffect(() => {
     fetch(`${envURL}/articles`)

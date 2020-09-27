@@ -27,13 +27,18 @@ const Layout = ({children}) => {
   },[state.isLoggedIn, dispatch]);
 
   useEffect(()=>{
+    if (typeof window !== `undefined`) {
     const darkTheme = localStorage.getItem('darkTheme')  === 'true';
     dispatch({ type: 'DARK_THEME', payload: darkTheme });
+    }
   },[state.darkTheme, dispatch])
 
   const {t}=  useTranslation(); // INITIALIZE T FUNCTION
   useEffect(()=>{
-   const savedLang = localStorage.getItem('language');
+   let savedLang = ""
+   if (typeof window !== `undefined`) {
+    savedLang = localStorage.getItem('language');
+   }
     dispatch({type: 'CHANGE_LANGUAGE', payload: savedLang});
     dispatch({type: 'SET_T', payload: t});
 
@@ -41,17 +46,17 @@ const Layout = ({children}) => {
   
   return (
     <HelmetProvider>
-    <div className={(state.darkTheme)?'app dark': 'app light'}>
-      <Helmet>
-        <link rel="icon" href={favicon} />
-      </Helmet>
-      <header className="header primary " id="header">
-        <Navigation />
-      </header>
-      {children}
-      <Footer className='footer' />
-    </div>
-   </HelmetProvider>
+      <div className={(state.darkTheme)?'app dark': 'app light'}>
+        <Helmet>
+          <link rel="icon" href={favicon} />
+        </Helmet>
+        <header className="header primary " id="header">
+          <Navigation />
+        </header>
+        {children}
+        <Footer className='footer' />
+      </div>
+    </HelmetProvider>
   );
 };
 

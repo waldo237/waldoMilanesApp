@@ -16,17 +16,23 @@ const Settings = () => {
   ];
   useEffect(() => {
     if (state.darkTheme) {
+      if (typeof window !== `undefined`) {
       const darkThemeSwich = document.getElementById('dark-theme');
       darkThemeSwich.setAttribute('checked', state.darkTheme);
+      }
     }
   }, [state.darkTheme])
   const inputHandler = (event) => {
+    if (typeof window !== `undefined`) {
     localStorage.setItem('darkTheme', event.target.checked);
+    }
     dispatch({ type: 'DARK_THEME', payload: event.target.checked });
   };
   const handleChange = (e) => {
     const {value} = e.target;
+    if (typeof window !== `undefined`) {
     localStorage.setItem('language',value);
+    }
     dispatch({type: 'CHANGE_LANGUAGE', value});
     i18n.changeLanguage(value);
   };

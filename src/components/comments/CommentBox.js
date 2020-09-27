@@ -53,13 +53,16 @@ const CommentBox = ({ setUpdated, itemId, pathname, comments, rating }) => {
   };
 
   function selectElementContents(el) {
+    if (typeof window !== `undefined`) {
     const range = document.createRange();
     range.selectNodeContents(el);
     const sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
+    }
   }
   const handleEditing = (comment) => {
+    if (typeof window !== `undefined`) {
     setEditingMode(true);
     setSelectedComment(comment)
     const textInput = document.getElementById('comment-input');
@@ -67,7 +70,7 @@ const CommentBox = ({ setUpdated, itemId, pathname, comments, rating }) => {
     setCommentInput(comment.comment);
     textInput.focus({ preventScroll: false }); // check if it works without it
     selectElementContents(textInput);
-
+    }
   }
 
 

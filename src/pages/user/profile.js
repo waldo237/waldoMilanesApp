@@ -53,8 +53,10 @@ const Profile = (match) => {
     setErrors(profileValidator(profileCopy).errors.filter((e) => e.type === name));
   };
   const triggerFileInput = () => {
+    if (typeof window !== `undefined`) {
     const fileInput = document.getElementById("file-input");
     fileInput.click();
+    }
   }
   const collectPhoto =async (e) => {
     try {

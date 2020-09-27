@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState,  useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
@@ -27,9 +27,7 @@ const SignInForm = () => {
     setErrors(signInValidator(user).errors.filter((e) => e.type === name));
   };
 
-  useEffect(() => {
-    document.title = "Become my follower";
-  }, []);
+
 const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe, dispatch, navigate};
 
   return (

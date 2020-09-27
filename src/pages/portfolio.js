@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, {  useContext } from "react";
 import "./portfolio.scss";
 import { Link } from "gatsby";
 import {
@@ -15,9 +15,7 @@ import SEO from "../components/seo";
 const Portfolio = () => {
   const [state]= useContext(Context);
   const {Trans} = state;
-  useEffect(() => {
-    document.title = "Projects";
-  }, []);
+
   const projects = [
 
     {
@@ -66,7 +64,7 @@ const Portfolio = () => {
     <>
       <SEO 
         title="Technologies I am proficient at. ReactJs | VueJS | NodeJs | Java | JavaScript" 
-        description="Desktop Apps and RESTful APIs I have done with Java. User Interfaces I have built with ReactJS. Web Apps I have built with VueJS"
+        description="Desktop Apps and RESTful APIs I have done with Java. User Interfaces I have built with ReactJS. Web Apps I have built with VueJS. Servers and RESTful APIs I have done with NodeJS"
       />
       <main className="portfolio-container light fadeInUpx"> 
         <header className="porfolio-title primary--text ">

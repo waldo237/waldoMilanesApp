@@ -17,6 +17,7 @@ import envURL from '../envURL';
 import ScreenshotViewer from "../components/ProjectViewer/ScreenshotViewer";
 import CommentBox from "../components/comments/CommentBox";
 import { Context } from '../store/store'
+import SEO from "../components/seo";
 
 const ProjectViewer = ({ location }) => {
   const technologySwicher = () => {
@@ -46,7 +47,6 @@ const ProjectViewer = ({ location }) => {
   const technology = technologySwicher();
   const [updated, setUpdated] = useState(false);
   useEffect(() => {
-    document.title = `Work I have done with ${technology.title}`;
     fetch(`${envURL}/projects/${technology.extension}`)
       .then((res) => res.json())
       .then(setData)
@@ -55,6 +55,7 @@ const ProjectViewer = ({ location }) => {
   }, [location.pathname, updated]);
 
   const showModal = (value) => {
+    if (typeof window !== `undefined`) {
     const internalFiles = document.querySelectorAll(".modal");
     internalFiles.forEach((file) => {
       if (file.classList.contains(value)) {
@@ -62,9 +63,11 @@ const ProjectViewer = ({ location }) => {
         file.classList.toggle("modal-opened");
       }
     });
+  }
   };
 
   const toggleClasses = (parentId) => {
+    if (typeof window !== `undefined`) {
     const internalFiles = document.querySelectorAll(".internal-files");
     const iconsToTurn = document.querySelectorAll(".icon-to-turn");
     internalFiles.forEach((file) => {
@@ -77,27 +80,34 @@ const ProjectViewer = ({ location }) => {
       if (icon.classList.contains(parentId))
         icon.classList.toggle("turn-downwards");
     });
+  }
   };
   return (
     <>
-      <main className="project-viewer-container light">
-        <header className="project-viewer-title">
-          <div className='page-default-title-icon'>
-            <IconizeFile name={technology.extension} usingExtension />
-          </div>
-          <div>
-            <h1 className="primary--text">
-              {technology.title}
-            </h1>
-            <h4>
-              <Trans i18nKey='projectViewer.mainTitle'>Applications and APIs</Trans>  
-            </h4>
-          </div>
+      { (technology)
+      ?(
+        <main className="project-viewer-container light">
+          <SEO 
+            title={`Work I have done with ${technology.title}`}
+            description="Some code samples of working projects that demonstrate the coding skills I have gained over the years. Feel free to take a look at my code."
+          />
+          <header className="project-viewer-title">
+            <div className='page-default-title-icon'>
+              <IconizeFile name={technology.extension} usingExtension />
+            </div>
+            <div>
+              <h1 className="primary--text">
+                {technology.title}
+              </h1>
+              <h4>
+                <Trans i18nKey='projectViewer.mainTitle'>Applications and APIs</Trans>  
+              </h4>
+            </div>
 
 
-        </header>
-        <article className="all-projects fadeInUpx">
-          {collection && collection.length
+          </header>
+          <article className="all-projects fadeInUpx">
+            {collection && collection.length
           ? collection.map((project) => (
             // eslint-disable-next-line react/jsx-indent
           
@@ -228,8 +238,10 @@ const ProjectViewer = ({ location }) => {
               />
             </article>
           )}
-        </article>
-      </main>
+          </article>
+        </main>
+)
+      :null}
     </>
   );
 };

@@ -11,7 +11,6 @@ import ResponseAlert from '../components/ResponseAlert/ResponseAlert';
 import PasswordInput from '../components/Supporters/utilities/PasswordInput';
 import { resetPasswordValidator } from '../components/Supporters/utilities/signInValidator';
 import envURL from '../envURL';
-import SEO from '../components/seo';
 
 const EnterNewPassword = ({location}) =>{
     const [state] = useContext(Context);

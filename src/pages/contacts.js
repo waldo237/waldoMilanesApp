@@ -78,7 +78,7 @@ const Contacts = () => {
           </h1>
           <h4>
            
-            <Trans i18nKey='contact.titleLets'> Let&apos;s get in contact</Trans>  
+            <Trans i18nKey='contact.titleLets'> Let us get in contact</Trans>  
           </h4>
         </div>
       </header>

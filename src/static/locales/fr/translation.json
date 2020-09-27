@@ -1,0 +1,183 @@
+{
+  "articles": {
+    "titleArticles": "Articles",
+    "titleSub": "liés au développement de logiciels",
+    "pubished": "Publié le:",
+    "readMore": "En savoir plus"
+  },
+  "comment": {
+    "editComment": "Modifier le commentaire",
+    "deleteComment": "Supprimer le commentaire"
+  },
+  "commentBox": {
+    "comments": "Commentaires",
+    "share": "Partager",
+    "write": "Rédiger un commentaire",
+    "save": "sauvegarder"
+  },
+  "fallback": {
+    "please": "S’il vous plaît vous connecter pour faire cette action",
+    "sign": "se connecter",
+    "create": "Créer un compte"
+  },
+
+  "contact": {
+    "titleInterested": "Intéressé?",
+    "titleLets": "Contactons-nous ",
+    "waldo": " Waldo Milanes",
+    "address": "c/12 #44 Ensanche Mella 2, Santiago, République dominicaine",
+    "emailMe": "Envoyez-moi un courriel",
+    "name": "Nom",
+    "email": "Messagerie électronique",
+    "message": "Message",
+    "btnSend": "Envoyer"
+  },
+  "dashboard": {
+    "dash": "Bord",
+    "sP": "Projets spéciaux",
+    "sA": "Articles spéciaux",
+    "notification": "Notifications",
+    "settings": "Paramètres",
+    "SignOut": "Se déconnecter",
+    "profile": "Profil"
+  },
+
+  "nav": {
+    "home": "Accueil",
+    "myWork":"mes travaux",
+    "articles": "Des articles",
+    "Contacts": "Contactez moi",
+    "followers": "suiveurs"
+  },
+  "home": {
+    "aPracmatic": "Un pragmatique et dévoué",
+    "developer": "Développeur web",
+    "introductionParagraph": "Salut, je m'appelle Waldo Milanes. Je suis un professionnel passionné et compétent avec une expertise technique substantielle dans la conception et le développement d'applications Web.",
+    "hearMore":"en savoir plus",
+    "technicalTitle": "compétences techniques",
+    "technicalContent": "Je sais comment créer efficacement des interfaces élégantes et faciles à utiliser et configurer des bases de données back-end qui répondent aux différents besoins de l'entreprise.",
+    "managerialTitle": "compétences managériales",
+    "managerialContent": "Mon expérience en gestion pédagogique m'a donné l'opportunité d'aider de petites équipes à favoriser la coopération pour d'excellents résultats.",
+    "attitudelTitle": "attitude professionnelle",
+    "attitudeContent": "En particulier, j'excelle à communiquer mes idées avec respect et à négocier d'éventuelles divergences avec mes collègues.",
+    "myWorkBtn": "mes travaux"
+  },
+  "education": {
+    "career1T": "Titre en langues modernes",
+    "career1U": "Université technologique de Santiago (UTESA)",
+    "career1P": "République Dominicaine",
+    "career1D": "La capacité de communiquer clairement dans deux langues étrangères (anglais et français), à la fois verbalement et par écrit; communication professionnelle, orale et écrite; sensibilité aux différents contextes culturels; la capacité de travailler de manière autonome; compétences générales en recherche; auto-réflexion et jugement critique; l'autogestion, y compris la planification et le respect des délais; analyser les sources écrites et visuelles; adaptabilité et flexibilité.",
+    "career2T": "Développement de logiciels",
+    "career2U": "Institut technologique des Amériques (ITLA)",
+    "career2P": "République Dominicaine",
+    "career2D": "Les bases de la programmation; Algorithmes et structures de données; test et débogage de logiciels; une base solide de développement logiciel orienté objet; modèles de conception, bases du réseau; conception et gestion de bases de données relationnelles; collecte des exigences du projet et prototypage.",
+    "career3T": "Programmation Java intermédiaire",
+    "career3U": "Institut technologique des Amériques (ITLA)",
+    "career3P": "République Dominicaine",
+    "career3D": "Bases du langage de programmation Java, logique et syntaxe, programmation événementielle, structures de données associatives et séquentielles, structures de données classiques, tri et recherche, gestion des exceptions, programmation de base de données avec JDBC, programmation réseau, développement Interface graphique utilisant Swing, multithreading, applets Java, applications Web (Servlets), classes d'E / S avancées, expressions régulières, graphiques Java, introduction à Spring à l'aide de Spring Boot.",
+    "career4T": "Conception de bases de données et SQL",
+    "career4U": "Institut technologique des Amériques (ITLA)",
+    "career4P": "République Dominicaine",
+    "career4D": "Les bases de la programmation de bases de données: planification d'une base de données, bases de données relationnelles, enregistrements, types de données, ajout de règles de validation, normalisation et dénormalisation, intégrité référentielle, transactions ACID, requêtes SQL, opérations CRUD, tri des résultats et jointure de table. ",
+    "career5T": "Cours JavaScript et développeur Web",
+    "career5U": "LinkedIn Learning",
+    "career5P": "En ligne",
+    "career5D": "Les bases du HTML, les concepts fondamentaux CSS; Modèle de boîte CSS, Flexbox et Grid. Les bases de JavaScript telles que les variables, les types de données, les conditions, les boucles et les scripts DOM; fonctions d'ordre supérieur, fonctions IIFE, scopes et closures; application partielle et récursivité; prototypes et classes; callbacks et promises, système de module JS. Contrôle de version de logiciel; en utilisant Git.",
+    "career6T": "Cours de développement NodeJs",
+    "career6U": "LinkedIn Learning",
+    "career6P": "En ligne",
+    "career6D": "L'objet global, importer les modules, créer des événements personnalisés avec EventEmitter, lire, écrire et supprimer des fichiers, travailler avec des flux de fichiers, créer des processus enfants avec des fonctions exec et spawn, gérer des packages tiers avec npm, API REST, Node.js Frameworks, créez une application de base avec Express.js, gérez les données MongoDB avec Mongoose, gestion des erreurs et débogage, interrogation des ressources OWASP et gestion des menaces de sécurité, ajout de jetons à deux facteurs et en lecture seule, cryptage de gestion des données utilisateur et de session, ajout du protocole HTTPS à une application, utilisation des attributs de cookie et déploiement continu. ",
+    "career7T": "Cours de développeur Vue",
+    "career7U": "LinkedIn Learning",
+    "career7P": "En ligne",
+    "career7D": "Les bases de Vue.js, travailler avec des modèles, lier des classes avec des objets et des tableaux, créer des transitions et des animations, créer des routes et créer des liens de routeur, charger des modules, importer et parcourir des données, en utilisant des Props, des méthodes et des événements, Vue Router et Vuex. ",
+    "career8T": "Développeur JavaScript avec ReactJs",
+    "career8P": "En ligne",
+    "career8U": "LinkedIn Learning",
+    "career8D": "Principes de base de React.js, création et rendu d'éléments React, présentation de JSX, création d'un composant React, gestion de l'état avec des hooks React, utilisation de variables multi-états, obtention de données, utilisation de liaisons React-Router , Les indispensables de Redux. ",
+    "career9T": "Certification des pratiques d'évaluation efficaces",
+    "career9U": "University of Oregon",
+    "career9P": "Eugene, Oregon, USA",
+    "career9D": "Informations à jour sur les méthodologies actuelles associées aux pratiques d'évaluation dans la classe d'apprentissage des langues. Elles comprennent: les résultats d'apprentissage, l'alignement des pratiques pédagogiques sur les évaluations, la rédaction de bons éléments de test / l'analyse de test informelle, l'évaluation formative, les évaluations basées sur les performances, rubriques. ",
+    "career10T": "Université autonome de Saint-Domingue (UASD)",
+    "career10P": " République Dominicaine",
+    "career10D": "Connaissance des disciplines et sous-disciplines du domaine en linguistique anglaise; familiarisation avec les TIC pour l'enseignement et l'apprentissage de la langue anglaise. Sensibilisation aux aspects interculturels qui ont un impact sur la communication, la traduction et la médiation. Compréhension et intégration de masse et des informations complexes provenant de différentes sources. Capacité à mener des recherches théoriques et / ou empiriques, en exprimant les résultats dans des articles, des essais. Capacité à présenter publiquement les résultats de ses recherches. Attitude pour le travail d'équipe, avec les compétences qui en découlent : négocier, se faire comprendre, fournir et / ou accepter des critiques constructives. Attitude pour le travail indépendant, développement de l'initiative pour organiser efficacement son temps et ses efforts.",
+    "diplomaBtn": "Voir Diplôme"
+  },
+  "footer": {
+    "dev": "Développé par Waldo Milanes"
+  },  
+  "portfolio": {
+    "java": {
+      "title": "Applications de bureau et API RESTful que j'ai créées avec Java",
+      "desc": "Comme c'était le premier langage de programmation que j'ai appris, j'ai une place spéciale pour Java. Il a une énorme communauté et a été testé pendant des décennies. J'aime la façon dont il traite l'expérience des développeurs; vous faire savoir à l'avance ce que ce qui est autorisé et ce qui ne l'est pas. J'ai été initié aux concepts de la programmation orientée objet à l'aide de Java. Cela m'a certainement donné une base solide pour comprendre les modèles de conception et les structures de données courantes. Un autre grand avantage de Java est que vous devez utiliser explicitement des types de données lorsque vous déclarez une variable, ce qui vous fait réfléchir à son importance "
+    },
+    "node": {
+      "title": "Serveurs et API RESTful que j'ai fait avec NodeJS",
+      "desc": "Après avoir eu l'expérience de la conception d'API RESTful en Java, j'ai commencé à travailler avec NodeJS. Personnellement, j'aime cette implémentation de JavaScript en dehors du navigateur car elle me permet de développer une application entière en utilisant un seul langage du début à la fin. De plus, quand je le combine avec Express, il offre une touche très claire et concise à l'apparence de mon code. Le concept de 'middleware' est également une architecture brillante; juste le fait que vous pouvez brancher un middleware à un point de terminaison existant et ajouter nouvelle fonctionnalité, donne l'impression d'être magique. "
+    },
+    "vue": {
+      "title": "Applications Web que j'ai créées avec VueJS",
+      "desc": "VueJS a été le premier framework front-end que j'ai appris. Il simplifie très bien un grand nombre des tâches habituelles impliquées dans le développement front-end, telles que la modélisation des données, le bouclage de tableaux et l'utilisation de conditions. I J'ai découvert le concept du cycle de vie du rendu en expérimentant avec Vue. J'ai également beaucoup appris sur la gestion des états et comment appliquer un état global en utilisant Vuex. "
+    },
+    "react": {
+      "title": "Mes projets réalisés avec ReactJS",
+      "desc": "D'après mon expérience, React est un framework très robuste qui permet la manipulation de l'objet DOM d'une manière très similaire à Vanilla JavaScript. L'idée de la liaison de données unidirectionnelle apporte une compréhension de l'immuabilité des données et que En tant que développeurs, nous devons trouver des moyens de respecter ce principe. Mon parcours avec les bibliothèques de code entourant React a été assez agréable; elles sont très bien documentées et matures. "
+    },
+    "title": {
+      "h1": "Mes Travaux",
+      "h4": "Une collection de projets"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "theme": "Mode sombre",
+    "language": "Languages"
+  },
+  "projectViewer": {
+    "mainTitle": "Applications et API",
+    "updated": "Mis à jour sur:",
+    "description": "Description:",
+    "files": "Fichiers"
+  },
+  "followers": {
+    "followers": "Suiveurs",
+    "subtitle": "Si vous aimez ce que je fais, vous pouvez vous inscrire pour accéder à tout mon contenu et recevoir des notifications lorsque je publie de nouveaux documents.",
+    "tabSignUp": "S'enregistrer",
+    "tabSignOn": " Connectez-vous"
+  },
+  "signInForm": {
+    "signGoogle": "signer avec Google",
+    "signFacebook": " signer avec Facebook",
+    "or": "Ou",
+    "emailA": "Adresse e-mail",
+    "remember": "souvenez-vous de moi",
+    "forgot": "Oublié",
+    "password": "Mot de passe?",
+    "rePasswordInput": "saisir à nouveau le mot de passe",
+    "passwordInput": " saisir le mot de passe"
+
+  },
+  "signUp": {
+    "title": "s'enregistrer",
+    "fistName": "Prénom",
+    "lastName": "Nom de famille",
+    "emailA": "Adresse e-mail",
+    "btnSignUp": "s'enregistrer",
+    "already": "Déjà enregistré?",
+    "signOn": "Connectez-vous",
+    "password": "Mot de passe?"
+  },
+  "enterNewPass": {
+    "title": "Réinitialiser votre mot de passe",
+    "subtitle": "S’il vous plaît entrez et confirmer votre nouveau mot de passe soufflet",
+    "btn": "Envoyer un nouveau mot de passe"
+  },
+
+  "passwordReset": {
+    "title": "Oublié mon mot de passe",
+    "subtitle": "Entrez votre adresse e-mail",
+    "btn": "Réinitialiser le mot de passe"
+  }
+
+}

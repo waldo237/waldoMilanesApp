@@ -151,17 +151,17 @@ const Education = () => {
         {educationPoints.map((item) => (
           <div key={item.id} className="education-card lazy-effect">
             <div className='education-date-and-place'>
-              <h5>
+              <h3>
                 {item.duration}
-              </h5>
-              <h5>
+              </h3>
+              <h3>
                 {item.place}
-              </h5>
+              </h3>
             </div>
             <div className="education-description-card shadow hoverable-card">
               <h4>{item.university}</h4>
               <div className='education-institution'>
-                <h2>{item.career}  &nbsp;</h2>
+                <h5>{item.career}  &nbsp;</h5>
               </div>
               <p> {item.description} </p>
               <div>

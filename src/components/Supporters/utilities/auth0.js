@@ -14,7 +14,9 @@ const firebaseConfig = {
     measurementId: process.env.GATSBY_MEASUREMENT_ID,
   }; 
   // Initialize Firebase
+  if (typeof window !== 'undefined') {
   firebase.initializeApp(firebaseConfig);
+  }
 export const gProvider = new firebase.auth.GoogleAuthProvider();
 export const fProvider = new firebase.auth.FacebookAuthProvider();
 export const {auth, storage} = firebase

@@ -24,11 +24,13 @@ const SignUpForm = () => {
     setErrors(signUpValidator(user).errors.filter((e) => e.type === name));
   };
   const clearForm = () => {
+    if (typeof window !== `undefined`) {
     const allInput = document.querySelectorAll('#sign-up-form input');
     allInput.forEach((input) => {
       // eslint-disable-next-line no-param-reassign
       input.value = '';
     })
+  }
   }
   useEffect(() => {
     if (response && response.successful) clearForm();

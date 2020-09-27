@@ -10,7 +10,7 @@ envURL.js
 src/static/certificates
 # production
 /build
-/public/page-data
+/public/
 # misc
 .DS_Store
 .env.local

@@ -11,13 +11,17 @@ import {signInValidator} from './signInValidator'
  * @param {*} rememberMe  a boolean to decide where the token is stored.
  */
 const saveTokenLocally = (token, rememberMe) => {
+    if (typeof window !== `undefined`) {
     if (rememberMe === true) return localStorage.setItem('auth_access_token', token);
     return sessionStorage.setItem('auth_access_token', token)
+    };
 }
 const removeTokensFromStorage = () => {
+    if (typeof window !== `undefined`) {
     sessionStorage.removeItem('auth_access_token');
     localStorage.removeItem('auth_access_token');
     sessionStorage.removeItem('hashed_access');
+    }
 }
 /**
  * @function logOut  logs out the user from services,
@@ -125,14 +129,17 @@ const signWithGoogleOrFB = (whichService, options) => {
  */
 const fetchHashedAccess = () => {
     return new Promise((resolve, reject) => {
-        const hashedAccess = sessionStorage.getItem('hashed_access');
-        const token = (localStorage.getItem('auth_access_token'))
+        let hashedAccess =""
+        let token =""
+        if (typeof window !== `undefined`) {
+             hashedAccess = sessionStorage.getItem('hashed_access');
+             token = (localStorage.getItem('auth_access_token'))
             ? localStorage.getItem('auth_access_token')
             : sessionStorage.getItem('auth_access_token')
-
-        if (!token) return reject(new Error('there is not an existing token'));
-        if (!hashedAccess) {
-            const results = fetch(`${envURL}/auth/userIsLoggedIn`,
+        }
+            if (!token) return reject(new Error('there is not an existing token'));
+            if (!hashedAccess) {
+                const results = fetch(`${envURL}/auth/userIsLoggedIn`,
                 {
                     method: 'POST',
                     headers: {
@@ -151,7 +158,7 @@ const fetchHashedAccess = () => {
                     return removeTokensFromStorage();
                 })
                 .catch((e) => reject(new Error(`there was an issue while getting the data${e}`)));
-            resolve(results);
+                resolve(results);
         }
 
         return resolve({ hashedAccess, token });
@@ -192,10 +199,12 @@ const confirmLoggedIn = async () => {
 }
 
 const getIdFromLocalToken = () => {
+    if (typeof window !== `undefined`) {
     const token = (localStorage.getItem('auth_access_token'))
         ? localStorage.getItem('auth_access_token')
         : sessionStorage.getItem('auth_access_token');
     return (token) ? JSON.parse(window.atob(token.split('.')[1])) : {};
+    }
 }
 
 // eslint-disable-next-line import/prefer-default-export
