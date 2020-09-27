@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ResponseAlert from '../ResponseAlert/ResponseAlert'
 import Loading from '../Loading/Loading'
 import ErrorCard from '../ErrorCard/ErrorCard'
-import signUpValidator from './utilities/signUpValidator'
+import signUpValidator from './utilities/registerValidator'
 import PasswordInput from './utilities/PasswordInput'
 import envURL from '../../envURL';
 import { Context } from '../../store/store'
@@ -26,11 +26,11 @@ const SignUpForm = () => {
   const clearForm = () => {
     const allInput = document.querySelectorAll('#sign-up-form input');
     allInput.forEach((input) => {
+      // eslint-disable-next-line no-param-reassign
       input.value = '';
     })
   }
   useEffect(() => {
-    document.title = "Become my follower";
     if (response && response.successful) clearForm();
   }, [response]);
 
@@ -122,7 +122,7 @@ const SignUpForm = () => {
       </button>
       <p className="alredy-registered-question text-right">
         <Trans i18nKey='signUp.already'>Already registered?</Trans>  {" "}
-        <a href="#one-panel"><Trans i18nKey='signUp.signOn'>sign on</Trans></a>
+        <a href="#two-panel"><Trans i18nKey='signUp.signOn'>sign on</Trans></a>
       </p>
     </form>
 

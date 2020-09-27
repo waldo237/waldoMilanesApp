@@ -1,6 +1,6 @@
 import React from "react";
 import "./Technologies.scss";
-import { Link } from "react-router-dom";
+import { Link } from "gatsby";
 import {
   faNodeJs,
   faJava,

@@ -3,7 +3,7 @@ import React from 'react';
 import PropsType from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'gatsby';
 
 const ListWithNavItems = ({ item, openInnerList, isLoggedIn }) => {
   if (item && item.children) {
@@ -25,9 +25,9 @@ const ListWithNavItems = ({ item, openInnerList, isLoggedIn }) => {
             ? (
               <ul className="inner-nav-item-list">
                 {item.children.map((child) => (
-                  <NavLink
+                  <Link
                     activeClassName="active-route"
-                    exact
+                    exact="true"
                     to={child.link}
                     key={child.title}
                   >
@@ -37,7 +37,7 @@ const ListWithNavItems = ({ item, openInnerList, isLoggedIn }) => {
                       ) : null}{" "}
                       {child.title}
                     </button>
-                  </NavLink>
+                  </Link>
                 ))}
               </ul>
             ) : null}
@@ -51,11 +51,11 @@ const ListWithNavItems = ({ item, openInnerList, isLoggedIn }) => {
     if (item.title === 'settings' && !isLoggedIn) return null;
     return (
       <li>
-        <NavLink activeClassName="active-route" exact to={item.link}>
+        <Link activeClassName="active-route" exact="true" to={item.link}>
           <button type="button" className="btn spacious">
             {item.title}
           </button>
-        </NavLink>
+        </Link>
       </li>
     )
   }

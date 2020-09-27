@@ -1,0 +1,48 @@
+@import '../components/Utilities.scss';
+
+
+.single-article-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2% 96% 2%;
+    padding-bottom: 30px;
+    .single-article-card{
+        @extend .shadow;
+        @extend .hoverable-card;
+        @extend .card-container;
+        grid-column: 2/3;
+        color: var(--primary-color);
+        background: var(--light-card);
+        width: 86%;
+        padding: 4%;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: 2% 96% 2%;
+        @include bp(desktop){
+            max-width: 750px;
+        }
+        .single-article-title{
+            grid-column: 2/3;
+        }
+        .single-article-img{
+            grid-column: 2/3;
+            @extend .round-edges;
+            width: 95%;
+            max-width: 500px;
+           
+        }
+        .single-article-date{
+            grid-column: 2/3;
+            @include bp(desktop){
+                font-size: 1em;
+            }
+        }
+        .single-article-text{
+            grid-column: 2/3;
+            line-height: 1.5;
+            @include bp(desktop){
+                float: left;
+            }
+        }
+    }
+}

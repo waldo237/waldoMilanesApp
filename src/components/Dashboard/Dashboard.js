@@ -1,30 +1,30 @@
 import React, {useContext} from 'react';
-import {Context}  from '../../store/store';
 import './Dashboard.scss';
+import { navigate } from "gatsby"  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram, faNewspaper, faBell, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from 'react-router-dom';
 import Propstype from 'prop-types';
 import Avatar from '../Avatar/Avatar';
+import {Context}  from '../../store/store';
 import { logOut, getIdFromLocalToken} from '../Supporters/utilities/authorizationFunctions'
 import { uuidv4 } from '../gobalUtil';
 
 const Dashboard = ({ removeDisplayNone }) => {
   const [state, dispatch] = useContext(Context)
   const { Trans } = state;
-  const history = useHistory();
+
   
   const sendToProfile = async () => {
     const {_id} = getIdFromLocalToken();
     
-    history.push(`/user/profile/${_id}`);
+    navigate(`/user/profile/${_id}/`);
   }
   const actions = [
     { key: uuidv4(), title:  <Trans i18nKey='dashboard.sP'>Special projects</Trans>, icon: faProjectDiagram, link: '' },
     {  key: uuidv4(),title: <Trans i18nKey='dashboard.sA'>Special Articles</Trans>, icon: faNewspaper, link: '' },
     {  key: uuidv4(),title:  <Trans i18nKey='dashboard.notification'>Notifications</Trans>, icon: faBell, link: '' },
     {  key: uuidv4(),title:  <Trans i18nKey='dashboard.settings'>Settings</Trans>, icon: faCog, link: '', id: 'setting-btn', func: ()=> removeDisplayNone('settings-container') },
-    {  key: uuidv4(),title:  <Trans i18nKey='dashboard.SignOut'>Sign out</Trans>, icon: faSignOutAlt, link: '', func: ()=> logOut(history, dispatch) },
+    {  key: uuidv4(),title:  <Trans i18nKey='dashboard.SignOut'>Sign out</Trans>, icon: faSignOutAlt, link: '', func: ()=> logOut(navigate, dispatch) },
   ]
   return (
     <>
@@ -47,7 +47,7 @@ const Dashboard = ({ removeDisplayNone }) => {
                 <h1 className='dash-user-info-name primary--text'>{state.profile.firstName}{" "} {state.profile.lastName}</h1>
                 <button type='button' onClick={sendToProfile} className='dash-user-info-profile'>
                   <Trans i18nKey='dashboard.profile'>profile</Trans> 
-                  </button>
+                </button>
               </div>
             </div>
 

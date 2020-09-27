@@ -22,15 +22,15 @@ const removeTokensFromStorage = () => {
 /**
  * @function logOut  logs out the user from services,
  * locates the token,delete it from localStorage, and redirects to '/ '
- * @param history is an instance of the useHistory hook
+ * @param navigate is an instance of the useHistory hook
  * @todo before using it, prevent default behavior from event, in case it's called inside form.
  */
-const logOut = (history, dispatch) => {
+const logOut = (navigate, dispatch) => {
     auth().signOut()
         .then(removeTokensFromStorage())
         .then(dispatch({ type: 'SET_PROFILE', payload: {} }))
         .then(dispatch({ type: 'SET_USER_IS_LOGGED_IN', payload: false }))
-        .then(history.push('/'))
+        .then(navigate('/'))
         .catch(console.err)
 }
 
@@ -42,10 +42,10 @@ const logOut = (history, dispatch) => {
  * @param {*} setResponse a useState function (object:{message:string, successful:boolean, link:url})
  * @param {*} setErrors a useState function (errors:array)
  * @param {*} dispatch ({ type: 'SET_USER_IS_LOGGED_IN', payload: boolean })
- * @param history is an instance of the useHistory hook
+ * @param navigate is an instance of the useHistory hook
  */
 const logIn = (user, options) => {
-    const {setRequest, setErrors, setResponse, dispatch, history} = options;
+    const {setRequest, setErrors, setResponse, dispatch, navigate} = options;
     if (signInValidator(user).valid) {
         setRequest(true);
         const sanitizedData = signInValidator(user).sanitized;
@@ -62,11 +62,11 @@ const logIn = (user, options) => {
                         saveTokenLocally(jsonRes.token, user.rememberMe);
                         dispatch({ type: 'SET_USER_IS_LOGGED_IN', payload: res.ok });
                     }
+                    if(res.ok) navigate('/portfolio/')
                     return { successful: res.ok, message: jsonRes.message, link: jsonRes.link }
                 }))
             .then(setResponse)
             .then(() => setRequest(false))
-            .then(()=> {if(Response && Response.successful) history.push('/portfolio')})
             .catch(console.error);
     } else {
         setErrors(signInValidator(user).errors);
@@ -81,10 +81,10 @@ const logIn = (user, options) => {
  * @param {*} setErrors a useState function (errors:array)
  * @param {*} dispatch ({ type: 'SET_USER_IS_LOGGED_IN', payload: boolean })
  * @param {*} rememberMe boolean to indicate if the data should be saved permantently.
- * @param history is an instance of the useHistory hook
+ * @param navigate is an instance of the useHistory hook
  */
 const signWithGoogleOrFB = (whichService, options) => {
-    const {setRequest, setResponse, rememberMe, dispatch, history} = options;
+    const {setRequest, setResponse, rememberMe, dispatch, navigate} = options;
     const provider = (whichService === 'fb') ? fProvider : gProvider;
     setRequest(true);
     auth().signInWithPopup(provider)
@@ -106,11 +106,11 @@ const signWithGoogleOrFB = (whichService, options) => {
                             saveTokenLocally(jsonRes.token, rememberMe);
                             dispatch({ type: 'SET_USER_IS_LOGGED_IN', payload: res.ok });
                         }
+                        if(res.ok) navigate('/portfolio/')
                         return { successful: res.ok, message: jsonRes.message }
                     }))
                 .then(setResponse)
                 .then(() => setRequest(false))
-                .then(()=> history.push('/portfolio'))
                 .catch(console.error);
         })
         .catch(err => console.log(err.message));
@@ -184,8 +184,10 @@ const confirmLoggedIn = async () => {
     // return false;
     const res = await fetchHashedAccess()
         .then(compareAccessKeys)
-        .catch((e) => { console.log(e.message) });
-    console.log(res);
+        .catch((e) => { 
+            // console.log(e.message) 
+        });
+   
     return res
 }
 

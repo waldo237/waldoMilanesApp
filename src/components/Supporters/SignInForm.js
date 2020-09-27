@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
-import { useHistory, Link } from 'react-router-dom'
+import { Link,navigate } from 'gatsby'
 import ResponseAlert from '../ResponseAlert/ResponseAlert'
 import Loading from '../Loading/Loading'
 import ErrorCard from '../ErrorCard/ErrorCard'
@@ -19,7 +19,7 @@ const SignInForm = () => {
   const [response, setResponse] = useState(null);
   const [requestStarted, setRequest] = useState(false);
   const [displayableErrors, setErrors] = useState([]);
-  const history = useHistory();
+ 
 
   const inputHandler = (event) => {
     const { name } = event.target;
@@ -30,23 +30,23 @@ const SignInForm = () => {
   useEffect(() => {
     document.title = "Become my follower";
   }, []);
-const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe, dispatch, history};
+const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe, dispatch, navigate};
 
   return (
-    <form className="sign-form" onSubmit={(e) => { e.preventDefault(); logIn(user, options) }}>
+    <form className="sign-form">
       <div className="o-auth-btns">
         {response
           ? (<ResponseAlert response={response} email={user.email} setResponse={setResponse} />)
           : (<div>{requestStarted ? <Loading message="Checking your credentials" /> : null}{" "} </div>)}
         {(displayableErrors) ? <ErrorCard errors={displayableErrors} setErrors={setErrors} /> : null}
-        <button type="submit" className="google-btn" onClick={e => { e.preventDefault(); signWithGoogleOrFB('google', options) }}>
+        <button type="button" className="google-btn" onClick={e => { e.preventDefault(); signWithGoogleOrFB('google', options) }}>
           {" "}
           <FontAwesomeIcon className="fa-lg" icon={faGoogle} />
           {" "}
           <Trans i18nKey='signInForm.signGoogle'> sign with google</Trans>
         </button>
         <button
-          type="submit"
+          type="button"
           className="facebook-btn"
           onClick={e => { e.preventDefault(); signWithGoogleOrFB('fb', options) }}
         >
@@ -75,7 +75,7 @@ const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe
 
       </div>
 
-      <PasswordInput id='sign-in' inputHandler={inputHandler} strength={-1} />
+      <PasswordInput onKeyDown={(e) => { e.preventDefault(); if(e.key === 'Enter') logIn(user, options) }} id='sign-in' inputHandler={inputHandler} strength={-1} />
 
       <div className="form-group">
         <div className="custom-control custom-checkbox">
@@ -97,7 +97,12 @@ const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe
         </div>
       </div>
 
-      <button disabled={requestStarted} type="submit" className="submit-btn primary">
+      <button 
+        disabled={requestStarted} 
+        type="button" 
+        className="submit-btn primary"
+        onClick={(e) => { e.preventDefault(); logIn(user, options) }}
+      >
         {(requestStarted)
            ? <FontAwesomeIcon className="fa-spin" icon={faCircleNotch} />
             : <Trans i18nKey='followers.tabSignOn'>Sign On</Trans>} 

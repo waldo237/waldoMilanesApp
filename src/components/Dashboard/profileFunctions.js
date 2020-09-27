@@ -5,7 +5,6 @@ import { fetchPayloadFromJWT } from '../Supporters/utilities/authorizationFuncti
 import { getTokenFromLocalStorage } from "../gobalUtil";
 
 const profileValidator = (user) => {
-  console.log(user)
   const res = {
     valid: true,
     errors: [],

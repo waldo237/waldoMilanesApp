@@ -10,7 +10,7 @@ envURL.js
 src/static/certificates
 # production
 /build
-
+/public/page-data
 # misc
 .DS_Store
 .env.local
@@ -25,3 +25,4 @@ yarn-error.log*
 firebase.json
 .firebase
 .env
+.cache

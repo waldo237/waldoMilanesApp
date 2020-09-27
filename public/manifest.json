@@ -1,7 +1,7 @@
 {
   "short_name": "Waldo Milanes Web Development Portfolio",
   "name": "A presentation of all my Web Development work",
-  "icons": [],
+  "icons": [{"src":"../src/static/banner.png"}],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
