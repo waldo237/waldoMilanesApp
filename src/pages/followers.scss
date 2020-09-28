@@ -95,7 +95,7 @@
   flex-direction: column;
   .o-auth-btns {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     .google-btn {
       @extend .hoverable-btn;
       grid-row: 1/2;
@@ -108,8 +108,18 @@
       background: #3b5998;
       font-size: 1em;
     }
-    .or {
+    .github-btn{
+      @extend .facebook-btn;
       grid-row: 3/4;
+      background: black;
+      color: white;
+      border: 1px solid white;
+      &:hover{
+        filter: brightness(.8);
+      }
+    }
+    .or {
+      grid-row: 4/5;
       justify-self: center;
     }
   }

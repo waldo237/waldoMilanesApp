@@ -19,4 +19,5 @@ const firebaseConfig = {
   }
 export const gProvider = new firebase.auth.GoogleAuthProvider();
 export const fProvider = new firebase.auth.FacebookAuthProvider();
+export const ghProvider = new firebase.auth.GithubAuthProvider();
 export const {auth, storage} = firebase

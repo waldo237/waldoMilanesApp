@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState,  useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faGithub,  faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { Link,navigate } from 'gatsby'
 import ResponseAlert from '../ResponseAlert/ResponseAlert'
@@ -54,6 +54,19 @@ const options =  {setRequest, setErrors, setResponse, rememberMe:user.rememberMe
             icon={faFacebookF}
           />{" "}
           <Trans i18nKey='signInForm.signFacebook'> sign with facebook</Trans>
+          {" "}
+        </button>
+        <button
+          type="button"
+          className="github-btn"
+          onClick={e => { e.preventDefault(); signWithGoogleOrFB('github', options) }}
+        >
+          {" "}
+          <FontAwesomeIcon
+            className="fa-lg"
+            icon={faGithub}
+          />{" "}
+          <Trans i18nKey='signInForm.signGithub'> sign with GitHub</Trans>
           {" "}
         </button>
         <h4 className="or"><Trans i18nKey='signInForm.or'>Or</Trans></h4>

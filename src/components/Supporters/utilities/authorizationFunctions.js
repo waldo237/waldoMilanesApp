@@ -1,4 +1,4 @@
-import { auth, gProvider, fProvider } from './auth0';
+import { auth, gProvider, fProvider, ghProvider } from './auth0';
 import envURL from '../../../envURL';
 import {signInValidator} from './signInValidator'
 
@@ -79,7 +79,7 @@ const logIn = (user, options) => {
 
 /**
  * @function signWithGoogleOrFB logs the user with the Auth0 technique.
- * @param {*} whichService string (fb | google)
+ * @param {*} whichService string (fb | google | github)
  * @param {*} setRequest a useState function(requestStarted:boolean)
  * @param {*} setResponse a useState function (object:{message:string, successful:boolean, link:url})
  * @param {*} setErrors a useState function (errors:array)
@@ -89,13 +89,30 @@ const logIn = (user, options) => {
  */
 const signWithGoogleOrFB = (whichService, options) => {
     const {setRequest, setResponse, rememberMe, dispatch, navigate} = options;
-    const provider = (whichService === 'fb') ? fProvider : gProvider;
+    const provider = ()=> {
+        let selectedProvider = null;
+        switch (whichService) {
+            case "fb":
+                selectedProvider = fProvider
+                break;
+            case "google":
+                selectedProvider = gProvider
+                break;
+            case "github":
+                selectedProvider = ghProvider
+                break;
+            default: selectedProvider = null;
+                break;
+        }
+        return selectedProvider
+       
+    } 
     setRequest(true);
-    auth().signInWithPopup(provider)
+    auth().signInWithPopup(provider())
         .then((result) => {
             const { user } = result;
             const names = user.displayName.split(" ");
-            const reqBody = { cu_id: user.uid, email: user.email, firstName: names[0], lastName: names[names.length - 1] };
+            const reqBody = { cu_id: user.uid, email: user.email, firstName: names[0], lastName: names[names.length - 1], photoURL:user.photoURL };
 
             fetch(`${envURL}/auth/withProvider`, {
                 method: "POST",
