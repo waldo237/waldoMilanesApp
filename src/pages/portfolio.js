@@ -79,6 +79,7 @@ const Portfolio = () => {
             key={project.id}
             className="hoverable-card technology-container"
           >
+            
             <Link to={project.url} className="link">
               <div className="technology-icon"><FontAwesomeIcon
                 className="fa-3x"

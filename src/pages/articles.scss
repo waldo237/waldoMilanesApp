@@ -9,7 +9,40 @@
     margin-top: 10px;
     @extend .page-default-title;
   }
-
+.filter{
+  background: transparent;
+  color: var(--primary-color);
+  grid-column:2/3;
+  width: 86%;
+  padding: 4%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  input{
+    margin: auto;
+  }
+ 
+  .lower-row{
+    display: flex;
+    padding: 5px;
+    font-size: 1.2em;
+    align-items: center;
+    label{
+        margin: auto 20px;
+    }
+    .sorting-btn{
+      @extend .btn;
+      background: transparent;
+      color: var(--primary-color);
+      width: 18px;
+      height: 18px;
+      margin: auto 15px;
+    }
+  }
+  
+}
   .article-card {
     @extend .shadow;
     @extend .hoverable-card;

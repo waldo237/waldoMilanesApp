@@ -13,20 +13,22 @@ import envURL from '../envURL';
 import Loading from "../components/Loading/Loading";
 import { Context } from "../store/store";
 import SEO from "../components/seo";
+import Filter  from "../components/Filter/Filter";
 
 const Articles = () => {
   const [state, dispatch] = useContext(Context);
-  const [articles, setArticles] = useState(null);
+  const [articles, setArticles] = useState([]);
+  const [displayableArr, setDisplayableArray] = useState([]);
   const { Trans } = state;
  const setData = (data)=>{
   dispatch({type: 'SET_ARTICLES', payload: data});
   setArticles(data);
+  setDisplayableArray(data);
  }
-  // const [articles, setData] = useState([]);
   useEffect(()=>{
     if (typeof window !== `undefined`) {
-    const moreAboutMe = document.querySelectorAll(".lazy-effect");
-    moreAboutMe.forEach((item)=>{
+    const elemWithLazyTrans = document.querySelectorAll(".lazy-effect");
+    elemWithLazyTrans.forEach((item)=>{
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) =>
            (entry.isIntersecting && !item.classList.contains('fadeInUpx')) ? item.classList.add("fadeInUpx"): ''
@@ -41,8 +43,6 @@ const Articles = () => {
       .then((res) => res.json())
       .then(setData)
       .catch(console.error);
-     
-       
   }, [state.articles]);
 
   return (
@@ -69,9 +69,15 @@ const Articles = () => {
             </h4>
           </div>
         </header>
-        
-        {articles && articles.length
-        ?articles.map((item) => (
+
+        <Filter
+          items={articles}
+          itemType={<Trans i18nKey='articles.article'>article</Trans>} 
+          setDisplayableArray={setDisplayableArray}
+        />
+
+        {displayableArr.length
+        ?displayableArr.map((item) => (
           <article
             key={item._id}
             className="article-card lazy-effect"
