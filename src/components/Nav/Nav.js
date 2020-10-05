@@ -47,7 +47,7 @@ const Navigation = () => {
         const timer = setTimeout(() => {
           toggleSideMenu(value)
         }, 300);
-        container.style.animation = ' slideOutRightx 0.3s cubic-bezier(0.47, 0, 0.745, 0.715)';
+        container.style.animation = 'slideOutRightx 0.3s cubic-bezier(0.47, 0, 0.745, 0.715)';
         return () => clearTimeout(timer);
       }
 
