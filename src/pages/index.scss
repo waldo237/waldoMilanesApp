@@ -284,7 +284,7 @@
   @include bp(desktop){
     font-size: 1.1em;
     width: 90%;
-    padding: 140px 5% 80px 5%;
+    padding: 140px 5% 100px 5%;
   }
   #more-about-me-wrapper{
     display: flex;
@@ -311,6 +311,7 @@
       }
       @include bp(desktop){
         width:28%;
+       
       }
     }
     .personal-quality-shape{
