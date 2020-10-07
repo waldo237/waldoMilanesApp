@@ -11,7 +11,7 @@ import { uuidv4 } from '../gobalUtil';
 
 const Dashboard = ({ removeDisplayNone }) => {
   const [state, dispatch] = useContext(Context)
-  const { Trans } = state;
+  const { Trans } = state; 
 
   
   const sendToProfile = async () => {
