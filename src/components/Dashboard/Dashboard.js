@@ -4,7 +4,7 @@ import { navigate } from "gatsby"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram, faNewspaper, faBell, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Propstype from 'prop-types';
-import Avatar from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar'; 
 import {Context}  from '../../store/store';
 import { logOut, getIdFromLocalToken} from '../Supporters/utilities/authorizationFunctions'
 import { uuidv4 } from '../gobalUtil';
