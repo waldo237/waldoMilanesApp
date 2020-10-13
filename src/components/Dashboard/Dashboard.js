@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import './Dashboard.scss';
+import './Dashboard.scss'; 
 import { navigate } from "gatsby"  
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram, faNewspaper, faBell, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
