@@ -8,7 +8,7 @@ import Avatar from '../Avatar/Avatar';
 import {Context}  from '../../store/store';
 import { logOut, getIdFromLocalToken} from '../Supporters/utilities/authorizationFunctions'
 import { uuidv4 } from '../gobalUtil';
-
+ 
 const Dashboard = ({ removeDisplayNone }) => {
   const [state, dispatch] = useContext(Context)
   const { Trans } = state; 
