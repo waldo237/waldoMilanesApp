@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+const fs = require('fs');
 exports.onCreatePage = async ({ page, actions }) => {
     const { createPage } = actions
     if (page.path.match(/^\/project/)) {
@@ -38,3 +39,12 @@ exports.onCreatePage = async ({ page, actions }) => {
       })
     }
   }
+
+
+exports.onPostBuild = () => {
+  fs.copyFile(`./firebase.json`, `./public/firebase.json`, (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+};
