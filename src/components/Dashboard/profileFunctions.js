@@ -29,7 +29,7 @@ const profileValidator = (user) => {
       message: "Please do not forget to include your last name.",
     });
     res.valid = false;
-  } else if (user.lastName > 20) {
+  } else if (user.lastName > 20) { 
     res.errors.push({
       type: "lastName",
       message: "The last name shouldn't be longer than 20 characters.",
