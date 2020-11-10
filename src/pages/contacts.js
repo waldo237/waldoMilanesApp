@@ -1,4 +1,4 @@
-import React, { useState,  useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./contacts.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,15 +8,24 @@ import {
   faPaperPlane,
   faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
+import ReCAPTCHA from "react-google-recaptcha";
 import contactValidator from "../components/Contacts/contactValidator";
 import ErrorCard from "../components/ErrorCard/ErrorCard";
 import ResponseAlert from "../components/ResponseAlert/ResponseAlert";
 import Loading from "../components/Loading/Loading";
+
 import envURL from '../envURL';
 import { Context } from "../store/store";
 import SEO from "../components/seo";
 
+
+
+
 const Contacts = () => {
+
+  const recaptchaRef = React.useRef();
+
+
   const [state] = useContext(Context);
   const { Trans } = state;
   const [user] = useState({});
@@ -32,23 +41,31 @@ const Contacts = () => {
   };
   const postEmail = (e) => {
     e.preventDefault();
+
     if (contactValidator(user).valid) {
-      setRequest(true);
+      if (!recaptchaRef.current.getValue()) {
+        setErrors([{
+          type: "ReCAPTCHA",
+          message: 'Please complete the ReCAPTCHA test',
+        }]);
+      } else {
+        setRequest(true);
+        const sanitizedData = contactValidator(user).sanitized;
 
-      const sanitizedData = contactValidator(user).sanitized;
+        fetch(`${envURL}/email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(sanitizedData),
+        })
+          .then((res) => res.json()
+            .then(jsonRes => ({ successful: res.ok, message: jsonRes.message })))
+          .then(setResponse)
+          .then(() => setRequest(false))
+          .catch(console.error);
 
-      fetch(`${envURL}/email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(sanitizedData),
-      })
-        .then((res) => res.json()
-          .then(jsonRes => ({ successful: res.ok, message: jsonRes.message })))
-        .then(setResponse)
-        .then(()=>setRequest(false))
-        .catch(console.error);
+      }
     } else {
       setErrors(contactValidator(user).errors);
     }
@@ -64,8 +81,8 @@ const Contacts = () => {
   };
   return (
     <main className="contact-container fadeInUpx light">
-      <SEO 
-        title="Let's get in contact." 
+      <SEO
+        title="Let's get in contact."
         description="If you like what I do and would like to use my services, don't hesitate to contact me."
       />
       <header className="contact-title">
@@ -74,11 +91,11 @@ const Contacts = () => {
         </div>
         <div>
           <h1 className="primary--text">
-            <Trans i18nKey='contact.titleInterested'>Interested?</Trans>  
+            <Trans i18nKey='contact.titleInterested'>Interested?</Trans>
           </h1>
           <h4>
-           
-            <Trans i18nKey='contact.titleLets'> Let us get in contact</Trans>  
+
+            <Trans i18nKey='contact.titleLets'> Let us get in contact</Trans>
           </h4>
         </div>
       </header>
@@ -86,7 +103,7 @@ const Contacts = () => {
       <section className=" contact-card">
         <div className="contact-info-card">
           <h1 className="waldo-milanes">
-            <Trans i18nKey='contact.waldo'> Waldo Milanes</Trans>   
+            <Trans i18nKey='contact.waldo'> Waldo Milanes</Trans>
           </h1>
           <div className="contact-info">
             <a
@@ -101,7 +118,7 @@ const Contacts = () => {
                   className="contact-card-icon"
                   icon={faMapMarker}
                 />{" "}
-                <Trans i18nKey='contact.address'>c/12 #44 Ensanche Mella 2, Santiago, Dom. Rep.</Trans>   
+                <Trans i18nKey='contact.address'>c/12 #44 Ensanche Mella 2, Santiago, Dom. Rep.</Trans>
               </p>
             </a>
             <a
@@ -136,7 +153,7 @@ const Contacts = () => {
             </a>
           </div>
         </div>
-        
+
         <form className="contact-me-form" onSubmit={postEmail}>
           <div className='response-area'>
             {response ? (
@@ -146,11 +163,11 @@ const Contacts = () => {
                 {requestStarted ? <Loading message="Processing your email" /> : null}{" "}
               </div>
               )}
-            {(displayableErrors)? <ErrorCard errors={displayableErrors} setErrors={setErrors} />:null}
+            {(displayableErrors) ? <ErrorCard errors={displayableErrors} setErrors={setErrors} /> : null}
           </div>
-          <div>
+          <div className={requestStarted?'display-none':''}>
             <h2 className="primary--text">
-              <Trans i18nKey='contact.emailMe'> Email me</Trans>   
+              <Trans i18nKey='contact.emailMe'> Email me</Trans>
               {" "}
               <FontAwesomeIcon
                 className="contact-card-icon"
@@ -159,9 +176,9 @@ const Contacts = () => {
             </h2>
           </div>
 
-          <div className="form-group">
+          <div className={requestStarted?'display-none':'form-group'}>
             <label className="input" htmlFor="emailer-name">
-              <Trans i18nKey='contact.name'>Name</Trans> 
+              <Trans i18nKey='contact.name'>Name</Trans>
               <input
                 id="emailer-name"
                 type="text"
@@ -173,10 +190,10 @@ const Contacts = () => {
               />
             </label>
           </div>
-          <div className="form-group">
+          <div className={requestStarted?'display-none':'form-group'}>
             <label className="input" htmlFor="emailer-email">
-              
-              <Trans i18nKey='contact.email'>E-mail</Trans> 
+
+              <Trans i18nKey='contact.email'>E-mail</Trans>
               <input
                 id="emailer-email"
                 type="email"
@@ -187,9 +204,9 @@ const Contacts = () => {
               />
             </label>
           </div>
-          <div className="form-group">
+          <div className={requestStarted?'display-none':'form-group'}>
             <label className="input" htmlFor="email-message">
-              <Trans i18nKey='contact.message'>Message</Trans> 
+              <Trans i18nKey='contact.message'>Message</Trans>
               <textarea
                 id="email-message"
                 type="text"
@@ -205,9 +222,19 @@ const Contacts = () => {
           </div>
           <button disabled={requestStarted} type="submit" className="contact-submit-btn">
             {(requestStarted)
-           ? <FontAwesomeIcon className="fa-spin" icon={faCircleNotch} />
-            :  <Trans i18nKey='contact.btnSend'>Send</Trans>}
+              ? <FontAwesomeIcon className="fa-spin" icon={faCircleNotch} />
+              : <Trans i18nKey='contact.btnSend'>Send</Trans>}
           </button>
+
+          <div className="recaptcha">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              size="compact"
+              badge="inline"
+              sitekey={process.env.GATSBY_SITE_KEY}
+            />
+          </div>
+
         </form>
       </section>
     </main>
