@@ -89,7 +89,7 @@ const Contacts = () => {
         <div className='page-default-title-icon'>
           <ContactTitleIcon />
         </div>
-        <div>
+        <div> 
           <h1 className="primary--text">
             <Trans i18nKey='contact.titleInterested'>Interested?</Trans>
           </h1>
