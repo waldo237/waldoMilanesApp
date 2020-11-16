@@ -390,7 +390,7 @@
     counter-increment: section;
     position: relative;
     color: var(--primary-color);
-    left: 50%;
+    left: 50%; 
     width: 48%;
     &::before {
       content: counter(section);
