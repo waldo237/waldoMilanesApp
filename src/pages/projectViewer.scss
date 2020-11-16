@@ -83,12 +83,14 @@
 
   .file-button {
     width: 70%;
-    margin: 0px;
+    margin: 2px;
     padding: 2px 1px ;
     font-size: 0.8em;
     background-color: transparent;
     color: var(--brown);
-    text-align: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     border: 0px;
     cursor: pointer;
     animation: fadeInDown 0.2s  cubic-bezier(0.550, 0.055, 0.675, 0.190) both;
@@ -100,9 +102,11 @@
         top: 1px;
         background-color: grey;
       }
+      .svg-inline--fa{
+        margin-right: 5px;
+      }
   }
   .file {
-    // position: absolute;
     width: 100%;
   }
 
@@ -112,10 +116,9 @@
   .folder-opened {
     display: unset;
   }
+   
 
-  .internal-files {
-    padding-left: 15px;
-  }
+
  
 }
 
@@ -128,7 +131,6 @@
   width: 90%;
   left: 0;
   right: 0;
-  // top: 0;
   bottom: 0;
   margin: auto;
   height: 450px;

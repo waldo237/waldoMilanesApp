@@ -163,6 +163,8 @@ const ProjectViewer = ({ location }) => {
               <div className="file-container">
                 <span className="bold"><Trans i18nKey='projectViewer.files'>Files</Trans></span>
                 <>
+                  {(project.code.file)
+                ?   (
                   <div key={project.code.file._id} className="file">
                     <button
                       type="button"
@@ -182,6 +184,8 @@ const ProjectViewer = ({ location }) => {
                       name={project.code.file.name}
                     />
                   </div>
+)
+                  :null}
                   {project.code.dir.map((folder) => (
                     <div key={folder._id}>
                       <button
