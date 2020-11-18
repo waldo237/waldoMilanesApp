@@ -12,7 +12,7 @@ const initialState = {
     selectedArticle: {},
     isLoggedIn:false,
     profile: {},
-    error: null,
+    error: null, 
     darkTheme: false,
     language: (initialLang) || 'EN',
     Trans,
