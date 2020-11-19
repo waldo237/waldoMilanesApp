@@ -11,7 +11,7 @@ const initialState = {
     articles: [],
     selectedArticle: {},
     isLoggedIn:false,
-    profile: {},
+    profile: {}, 
     error: null, 
     darkTheme: false,
     language: (initialLang) || 'EN',
