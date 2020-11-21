@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Trans } from 'react-i18next'
 import Reducer from './Reducer'
 
-let initialLang = ''
+let initialLang = '' 
 if (typeof window !== `undefined`) {
    initialLang = localStorage.getItem('language');
 }
