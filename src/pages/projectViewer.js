@@ -3,21 +3,19 @@ import "./projectViewer.scss";
 import Proptypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFile,
-  faFolder,
-  faChevronRight,
   faLink,
   faCalendarCheck,
   faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
 import IconizeFile from "../components/ProjectViewer/IconizeFile";
-import CodeModal from "../components/ProjectViewer/CodeModal";
 import Loading from "../components/Loading/Loading";
 import envURL from '../envURL';
 import ScreenshotViewer from "../components/ProjectViewer/ScreenshotViewer";
 import CommentBox from "../components/comments/CommentBox";
 import { Context } from '../store/store'
 import SEO from "../components/seo";
+import  Directory  from "../components/ProjectViewer/Directory";
+import  File from "../components/ProjectViewer/File";
 
 const ProjectViewer = ({ location }) => {
   const technologySwicher = () => {
@@ -164,72 +162,13 @@ const ProjectViewer = ({ location }) => {
                 <span className="bold"><Trans i18nKey='projectViewer.files'>Files</Trans></span>
                 <>
                   {(project.code.file)
-                ?   (
-                  <div key={project.code.file._id} className="file">
-                    <button
-                      type="button"
-                      onClick={() => showModal(project.code.file._id)}
-                      className="file-button"
-                    >
-                      <FontAwesomeIcon
-                        icon={faFile}
-                        className="primary--text"
-                      />{" "}
-                      {project.code.file.name}
-                    </button>
-                    <CodeModal
-                      showModal={showModal}
-                      code={project.code.file.content}
-                      fileId={project.code.file._id}
-                      name={project.code.file.name}
-                    />
-                  </div>
-)
+                  ?<File showModal={showModal} file={project.code.file} />
                   :null}
+                  
                   {project.code.dir.map((folder) => (
-                    <div key={folder._id}>
-                      <button
-                        type="button"
-                        onClick={() => toggleClasses(folder._id)}
-                        className="file-button"
-                      >
-                        <FontAwesomeIcon
-                          icon={faChevronRight}
-                          className={`${folder._id} primary--text icon-to-turn`}
-                        />{" "}
-                        <FontAwesomeIcon
-                          icon={faFolder}
-                          className="secondary--text"
-                        />{" "}
-                        {folder.name}
-                      </button>
-                      {folder.content.map((childFile) => (
-                        <div
-                          className={`${folder._id} file internal-files folder-closed`}
-                          key={childFile._id}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => showModal(childFile._id)}
-                            className="file-button "
-                          >
-                            {" "}
-                            <FontAwesomeIcon
-                              icon={faFile}
-                              className="primary--text"
-                            />{" "}
-                            {childFile.name}
-                          </button>
-                          <CodeModal
-                            showModal={showModal}
-                            code={childFile.content}
-                            fileId={childFile._id}
-                            name={childFile.name}
-                          />
-                        </div>
-                        ))}
-                    </div>
-                    ))}
+                    <Directory key={folder._id} folder={folder} toggleClasses={toggleClasses} showModal={showModal} />
+                  ))}
+
                 </>
               </div>
               <CommentBox setUpdated={setUpdated} itemId={project._id} pathname="/project" comments={project.comments} rating={project.rating} />
@@ -255,3 +194,5 @@ ProjectViewer.propTypes = {
 }
 
 export default ProjectViewer;
+
+
