@@ -2,19 +2,18 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import CodeModal from "./CodeModal";
+import IconizeFile from "./IconizeFile";
 
-export default function File({ file, showModal }) {
+export default function File({ file, showModal, insideAFolder }) {
   return (
-    <div className="file">
+    <div className={(insideAFolder)?`insideAFolder file`: `file`}>
       <button
         type="button"
         onClick={() => showModal(file._id)}
         className="file-button"
       >
-        <FontAwesomeIcon
-          icon={faFile}
-          className="primary--text"
-        />{" "}
+
+        <IconizeFile name={file.name} small />
         {file.name}
       </button>
       <CodeModal

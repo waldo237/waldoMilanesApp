@@ -87,7 +87,7 @@
     padding: 2px 1px ;
     font-size: 0.8em;
     background-color: transparent;
-    color: var(--brown);
+    color: var(--primary-color);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -95,8 +95,10 @@
     cursor: pointer;
     animation: fadeInDown 0.2s  cubic-bezier(0.550, 0.055, 0.675, 0.190) both;
       &:hover {
-        background-color: lightgray;
+        background: lighten($color: #8a898948, $amount: 5);
+        color: darken($color: #000000, $amount: 3)
       }
+       
       &:active {
         position: relative;
         top: 1px;
@@ -109,7 +111,10 @@
   .file {
     width: 100%;
   }
+.folder-color{
 
+color:  #f8d775 !important;
+}
   .folder-closed {
     display: none;
   }
@@ -242,3 +247,6 @@ to {
   }
 }
 
+.insideAFolder{
+  padding-left: 10px;
+}

@@ -8,9 +8,9 @@ import {
 import CodeModal from "./CodeModal";
 import File from "./File";
 
-const Directory = ({folder, toggleClasses, showModal})=> {
+const Directory = ({folder, toggleClasses, showModal, insideAFolder})=> {
   return (
-    <div className="folder-container">
+    <div className={(insideAFolder)?`insideAFolder folder-container`: `folder-container`}>
       
       <button
         type="button"
@@ -23,7 +23,7 @@ const Directory = ({folder, toggleClasses, showModal})=> {
         />{" "}
         <FontAwesomeIcon
           icon={faFolder}
-          className="secondary--text"
+          className="folder-color"
         />{" "}
         {folder.name}
       </button>
@@ -35,12 +35,11 @@ const Directory = ({folder, toggleClasses, showModal})=> {
           className={`${folder._id} file internal-files folder-closed`}
         >
           {(childFile.type === "file")
-          ? <File showModal={showModal} file={childFile} />
-          : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} />}
+          ? <File showModal={showModal} file={childFile} insideAFolder />
+          : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
         </div>
-
-)
-)}
+    )
+    )}
     </div>
 );
 }

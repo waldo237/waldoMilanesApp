@@ -9,35 +9,40 @@ import {
   faJava,
   faVuejs,
   faReact,
+  faSass,
 } from "@fortawesome/free-brands-svg-icons";
 
-const IconizeFile = ({ name, usingExtension }) => {
+const IconizeFile = ({ name, usingExtension, small }) => {
+ const iconClass = small ? "": "fa-2x";
   const fileNameExtension =(usingExtension)? name:name.split(".")[1];
   let icon = null;
   switch (fileNameExtension) {
     case "js":
-      icon = <FontAwesomeIcon className="fa-2x " icon={faJs} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faJs} />;
       break;
     case "java":
-      icon = <FontAwesomeIcon className="fa-2x  " icon={faJava} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faJava} />;
       break;
     case "css":
-      icon = <FontAwesomeIcon className="fa-2x  " icon={faCss3} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faCss3} />;
       break;
     case "html":
-      icon = <FontAwesomeIcon className="fa-2x " icon={faHtml5} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faHtml5} />;
       break;
     case "vue":
-      icon = <FontAwesomeIcon className="fa-2x " icon={faVuejs} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faVuejs} />;
       break;
     case "node":
-      icon = <FontAwesomeIcon className="fa-2x " icon={faNodeJs} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faNodeJs} />;
       break;
     case "react":
-      icon = <FontAwesomeIcon className="fa-2x " icon={faReact} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faReact} />;
+      break;
+    case "scss":
+      icon = <FontAwesomeIcon className={iconClass} icon={faSass} />;
       break;
     default:
-      icon = <FontAwesomeIcon className="fa-2x " icon={faCode} />;
+      icon = <FontAwesomeIcon className={iconClass} icon={faCode} />;
       break;
   }
   return icon;
