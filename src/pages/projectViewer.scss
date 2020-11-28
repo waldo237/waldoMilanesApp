@@ -14,7 +14,7 @@
   @extend .flex-row-space-evenly;
   grid-column: 2/3;
   width: 100%;
-
+flex-direction: column;
   .project-container {
     @extend .shadow;
     @extend .round-edges;
