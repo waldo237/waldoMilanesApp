@@ -2,8 +2,8 @@
 
 .project-viewer-container{
   width: 100%;
-  display: grid;
-  grid-template-columns: 2% 96% 2%;
+  display: flex;
+  flex-direction: column;
    padding-bottom: 30px;
   .project-viewer-title {
     @extend .page-default-title;
@@ -12,19 +12,18 @@
 
 .all-projects {
   @extend .flex-row-space-evenly;
-  grid-column: 2/3;
+  // grid-column: 2/3;
   width: 100%;
-flex-direction: column;
   .project-container {
     @extend .shadow;
     @extend .round-edges;
-    @extend .flex-column;
-    // @extend .hoverable-card;
+    // @extend .flex-column;
     background: var(--light-card);
     color: var(--primary-color);
-    padding: 20px 30px;
-    margin: 2%;
-    width: 90%; 
+    padding: 20px 2%;
+    max-width: 95%;
+    margin: auto;
+    // width: calc(95% - 60px); 
     @include bp(tablet){
       width: 80%;    
      }
@@ -32,10 +31,10 @@ flex-direction: column;
     width: 50%;    
    }
    .project-screenshot-container{
-      @extend .flex-column;
-      align-self: center;
-      width: 100%;
-      position: relative;
+      // @extend .flex-column;
+      // align-self: center;
+      // width: 90%;
+      // position: relative;
       padding: .6em 0px;
       @include bp(desktop){
         padding: 1em 0px;
@@ -43,10 +42,11 @@ flex-direction: column;
       .project-screenshot {
         @extend .round-edges;
         @extend .shadow;
-        align-self: center;
+        // align-self: center;
         width: 85%;
+    
         position: relative;
-        margin: auto 7.5%;
+        margin: auto ;
         top: calc(5%);
         @include bp(desktop){
           width: 66%;
@@ -59,10 +59,13 @@ flex-direction: column;
       margin: 0px;
     }
     .project-description-container{
+      max-width: 90%;
       p{
         margin: 12px 0px;
         color: var(--brown);
+        overflow-x: hidden;
         .project-description-label{
+        
           color: var(--primary-color);
           font-weight: 600;
         }
