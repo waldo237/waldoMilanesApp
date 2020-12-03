@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFile,
@@ -9,49 +9,53 @@ import CodeModal from "./CodeModal";
 import File from "./File";
 
 const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
+  const [opened, setOpen] = useState(false);
 
-  const isFolderOpened = (dossier) => {
-    if (typeof window !== `undefined`) {
-      let res = true;
-      const internalFiles = document.querySelectorAll(".internal-files");
-
-      internalFiles.forEach((file) => {
-        if (file.classList.contains(dossier._id)) {
-          res = false;
+  const folderBtnsClicked = (id) => {
+    return new Promise((resolve, reject) => {
+      const folderContainers = document.querySelectorAll('.folder-container');
+      folderContainers.forEach((container) => {
+        if (container.classList.contains(id)) {
+          setOpen(true)
+         return resolve(id)
         }
-      });
-      return res;
-    }
-  };
-  // const FolderContent = ({ folder }) => {
-  //   if (isFolderOpened(folder)) {
-  //     console.log(folder)
-  //     return null;
-  //   }
-  return (
-    <>  {
-      folder.content.map((childFile) => (
-        <div
-          key={`new ${childFile._id}`}
-          className={`${folder._id} file internal-files folder-closed`}
-        >
-          {(childFile.type === "file")
+      })
+    })
 
-         ? <File showModal={showModal} file={childFile} insideAFolder />
-         : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
-        </div>
-      )
+  }
+
+
+
+  const FolderContent = ({ folder }) => {
+
+    if (opened) {
+      return (
+        <>  {
+          folder.content.map((childFile) => (
+            <div
+              key={`${childFile._id}`}
+              className={`${folder._id} file internal-files folder-closed`}
+            >
+              {(childFile.type === "file")
+                ? <File showModal={showModal} file={childFile} insideAFolder />
+                : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
+            </div>
+          )
+          )
+        }
+        </>
       )
     }
-    </>
-)
+    return null;
   }
+
+
   return (
-    <div className={(insideAFolder) ? `insideAFolder folder-container` : `folder-container`}>
+    <div className={(insideAFolder) ? `insideAFolder folder-container ${folder._id}` : `folder-container ${folder._id}`}>
 
       <button
         type="button"
-        onClick={() => toggleClasses(folder._id)}
+        onClick={() => { folderBtnsClicked(folder._id).then(toggleClasses); }}
         className="file-button"
       >
         <FontAwesomeIcon

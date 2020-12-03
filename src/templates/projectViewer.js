@@ -170,9 +170,7 @@ const projectArray = pageContext? [pageContext]:[]
 
                         {project.code.dir.map((folder) => (
                           <Directory key={folder._id} folder={folder} toggleClasses={toggleClasses} showModal={showModal} />
-                        
                         ))}
-
                       </>
                     </div>
                     <CommentBox setUpdated={setUpdated} itemId={project._id} pathname="/project" comments={project.comments} rating={project.rating} />
