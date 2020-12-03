@@ -8,10 +8,47 @@ import {
 import CodeModal from "./CodeModal";
 import File from "./File";
 
-const Directory = ({folder, toggleClasses, showModal, insideAFolder})=> {
+const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
+
+  const isFolderOpened = (dossier) => {
+    if (typeof window !== `undefined`) {
+      let res = true;
+      const internalFiles = document.querySelectorAll(".internal-files");
+
+      internalFiles.forEach((file) => {
+        if (file.classList.contains(dossier._id)) {
+          res = false;
+        }
+      });
+      return res;
+    }
+  };
+  // const FolderContent = ({ folder }) => {
+  //   if (isFolderOpened(folder)) {
+  //     console.log(folder)
+  //     return null;
+  //   }
   return (
-    <div className={(insideAFolder)?`insideAFolder folder-container`: `folder-container`}>
-      
+    <>  {
+      folder.content.map((childFile) => (
+        <div
+          key={`new ${childFile._id}`}
+          className={`${folder._id} file internal-files folder-closed`}
+        >
+          {(childFile.type === "file")
+
+         ? <File showModal={showModal} file={childFile} insideAFolder />
+         : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
+        </div>
+      )
+      )
+    }
+    </>
+)
+  }
+  return (
+    <div className={(insideAFolder) ? `insideAFolder folder-container` : `folder-container`}>
+
       <button
         type="button"
         onClick={() => toggleClasses(folder._id)}
@@ -28,20 +65,11 @@ const Directory = ({folder, toggleClasses, showModal, insideAFolder})=> {
         {folder.name}
       </button>
 
-      {folder.content.map((childFile) => (
+      <FolderContent folder={folder} />
 
-        <div
-          key={`new ${childFile._id}`}
-          className={`${folder._id} file internal-files folder-closed`}
-        >
-          {(childFile.type === "file")
-          ? <File showModal={showModal} file={childFile} insideAFolder />
-          : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
-        </div>
-    )
-    )}
+
     </div>
-);
+  );
 }
 
 export default Directory;

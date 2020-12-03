@@ -4,12 +4,13 @@ import Proptypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
-  faCalendarCheck,
+  faCalendarCheck, 
   faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
+import { isEmpty } from 'lodash';
 import IconizeFile from "../components/ProjectViewer/IconizeFile";
 import Loading from "../components/Loading/Loading";
-import envURL from '../envURL';
+// import envURL from '../envURL';
 import ScreenshotViewer from "../components/ProjectViewer/ScreenshotViewer";
 import CommentBox from "../components/comments/CommentBox";
 import { Context } from '../store/store'
@@ -17,20 +18,26 @@ import SEO from "../components/seo";
 import Directory from "../components/ProjectViewer/Directory";
 import File from "../components/ProjectViewer/File";
 
-const ProjectViewer = ({ location }) => {
+const ProjectViewer = ({ pageContext }) => {
+	if ( isEmpty( pageContext ) ) {
+    return null;
+	}
+
+
   const technologySwicher = () => {
     let tempTechnology = null;
-    switch (location.pathname) {
-      case "/project/node":
+
+    switch (pageContext.technology) {
+      case "node":
         tempTechnology = { title: "NodeJs", extension: "node" };
         break;
-      case "/project/java":
+      case "java":
         tempTechnology = { title: "Java", extension: "java" };
         break;
-      case "/project/vue":
+      case "vue":
         tempTechnology = { title: "VueJs", extension: "vue" };
         break;
-      case "/project/react":
+      case "react":
         tempTechnology = { title: "ReactJs", extension: "react" };
         break;
       default:
@@ -38,64 +45,13 @@ const ProjectViewer = ({ location }) => {
     }
     return tempTechnology;
   };
+  const technology = technologySwicher();
 
-  const saveLocally = (data) => {
-    if(!data) return false;
-    const projectsSavedLocally = JSON.parse(localStorage.getItem('projects'));
-    if (projectsSavedLocally && projectsSavedLocally.length) {
-      projectsSavedLocally.forEach((item) => {
-        if (item.technology !== data[0].technology) {
-          projectsSavedLocally.push(data[0])
-          localStorage.setItem('projects', projectsSavedLocally)
-        }
-
-      })
-
-    } else {
-      localStorage.setItem('projects', JSON.stringify(data));
-    }
-
-    return data;
-  }
-
-  const retrieveFromLocalDB = (technology, setData) => {
-    let response = false;
- 
-     const projectsSavedLocally = JSON.parse(localStorage.getItem('projects'));
-     if (projectsSavedLocally && projectsSavedLocally.length) {
-       projectsSavedLocally.forEach((item) => {
-         if (item.technology === technology) {
-           setData([item])
-           
-           response = true;
-         }
-       })
-     }
-
-     return response;
-
-
-  }
-
-
-  const [collection, setData] = useState(null);
   const [state] = useContext(Context);
   const { Trans } = state;
-  const technology = technologySwicher();
   const [updated, setUpdated] = useState(false);
-
-  useEffect(() => {
-  const inMem =  retrieveFromLocalDB(technology.extension, setData);
-
-  if(!inMem){ 
-    fetch(`${envURL}/projects/${technology.extension}`) 
-      .then((res) => res.json())
-      .then(saveLocally)
-      .then(setData)
-      .catch(console.error);
-
-  }}, [location.pathname, updated]);
-
+   
+const projectArray = pageContext? [pageContext]:[]
   const showModal = (value) => {
     if (typeof window !== `undefined`) {
       const internalFiles = document.querySelectorAll(".modal");
@@ -124,6 +80,7 @@ const ProjectViewer = ({ location }) => {
       });
     }
   };
+
   return (
     <>
       { (technology)
@@ -135,7 +92,7 @@ const ProjectViewer = ({ location }) => {
             />
             <header className="project-viewer-title">
               <div className='page-default-title-icon'>
-                <IconizeFile name={technology.extension} usingExtension />
+                <IconizeFile name={technology.technology} usingExtension />
               </div>
               <div>
                 <h1 className="primary--text">
@@ -149,10 +106,12 @@ const ProjectViewer = ({ location }) => {
 
             </header>
             <article className="all-projects fadeInUpx">
-              {collection && collection.length
-                ? collection.map((project) => (
+              {
+             
+             projectArray && projectArray.length
+                ? projectArray.map((project) => (
                   // eslint-disable-next-line react/jsx-indent
-
+                 
                   <div className="project-container light" key={project._id}>
                     <ScreenshotViewer screenshot={project.screenshot} title={project.title} />
                     <div className='project-description-container'>
@@ -211,6 +170,7 @@ const ProjectViewer = ({ location }) => {
 
                         {project.code.dir.map((folder) => (
                           <Directory key={folder._id} folder={folder} toggleClasses={toggleClasses} showModal={showModal} />
+                        
                         ))}
 
                       </>
@@ -224,7 +184,8 @@ const ProjectViewer = ({ location }) => {
               If it's taking too long, you should probably come back later`}
                     />
                   </article>
-                )}
+                )
+}
             </article>
           </main>
         )
@@ -234,7 +195,7 @@ const ProjectViewer = ({ location }) => {
 };
 ProjectViewer.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  location: Proptypes.object,
+  // location: Proptypes.object,
 }
 
 export default ProjectViewer;

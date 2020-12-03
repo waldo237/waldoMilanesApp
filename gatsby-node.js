@@ -1,5 +1,13 @@
 /* eslint-disable no-param-reassign */
 const fs = require('fs');
+const createAllProjects = require( './create-pages/projectMaker' );
+
+exports.createPages = async ( { actions, graphql } ) => {
+	await createAllProjects( { actions, graphql } );
+
+};
+
+
 exports.onCreatePage = async ({ page, actions }) => {
     const { createPage } = actions
     if (page.path.match(/^\/project/)) {

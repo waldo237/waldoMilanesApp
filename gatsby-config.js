@@ -21,13 +21,33 @@ module.exports = {
         crossOrigin: `use-credentials`,
       },
     },
+    {
+      resolve: `gatsby-source-graphql`,
+			options: {
+				// This type will contain remote schema Query type
+				typeName: `hwgraphql`,
+				// This is field under which it's accessible
+				fieldName: `HWGraphQL`,
+				// Url to query from
+				url: `http://localhost:3001/graphql`,
+				refetchInterval: 6000,
+			},
+    },
+    {
+			resolve: 'gatsby-plugin-graphql-image',
+			options: {
+				schemaName: "hwgraphql",
+				imageFieldName: "sourceUrl"
+			}
+		},
     `gatsby-plugin-offline`,
   ],
+  
   siteMetadata: {
     title: "Waldo Milanes",
     titleTemplate: "%s · a pragmatic software engineer",
     description:
-      "I am an enthusiastic and skilled professional with substantial technical expertise in designing and developing web applications.",
+    "I am an enthusiastic and skilled professional with substantial technical expertise in designing and developing web applications.",
     url: "https://www.waldomilanes.com", // No trailing slash allowed!
     image: "/banner.png", // Path to your image you placed in the 'static' folder
     author: "waldo Milanes",
