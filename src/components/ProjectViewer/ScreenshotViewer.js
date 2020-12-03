@@ -1,5 +1,7 @@
 import React from 'react';
 import PropsType from 'prop-types'
+import Img from "gatsby-image"
+import {isUndefined, isNull} from 'lodash'
 
 const ScreenshotViewer = ({screenshot, title})=>{
     return (
@@ -25,6 +27,7 @@ const ScreenshotViewer = ({screenshot, title})=>{
                 alt={`${title}-view`}
               />
             </picture>
+            {(!isUndefined(screenshot) && !isNull(screenshot))?<Img fluid={screenshot.sourceUrlSharp.childImageSharp.fluid} alt={`${title}-view`} />  : null}
           </div>
         </a>
       </>
