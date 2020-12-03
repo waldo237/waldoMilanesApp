@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFile,
   faFolder,
   faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
-import CodeModal from "./CodeModal";
-import File from "./File";
+import FolderContent from "./FolderContent";
 
 const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
   const [opened, setOpen] = useState(false);
@@ -22,31 +20,6 @@ const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
       })
     })
 
-  }
-
-
-
-  const FolderContent = ({ folder }) => {
-
-    if (opened) {
-      return (
-        <>  {
-          folder.content.map((childFile) => (
-            <div
-              key={`${childFile._id}`}
-              className={`${folder._id} file internal-files folder-closed`}
-            >
-              {(childFile.type === "file")
-                ? <File showModal={showModal} file={childFile} insideAFolder />
-                : <Directory folder={childFile} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />}
-            </div>
-          )
-          )
-        }
-        </>
-      )
-    }
-    return null;
   }
 
 
@@ -69,7 +42,7 @@ const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
         {folder.name}
       </button>
 
-      <FolderContent folder={folder} />
+      <FolderContent opened={opened} folder={folder} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />
 
 
     </div>
