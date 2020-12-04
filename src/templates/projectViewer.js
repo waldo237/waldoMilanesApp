@@ -92,7 +92,8 @@ const projectArray = pageContext? [pageContext]:[]
             />
             <header className="project-viewer-title">
               <div className='page-default-title-icon'>
-                <IconizeFile name={technology.extension} usingExtension />
+                <IconizeFile name={pageContext.technology} usingExtension />
+                
               </div>
               <div>
                 <h1 className="primary--text">
@@ -117,6 +118,7 @@ const projectArray = pageContext? [pageContext]:[]
                     <div className='project-description-container'>
                       <h1 className="project-title primary--text">
                         {project.title}
+                       
                       </h1>
                       <p>
                         <span className="project-description-label">
