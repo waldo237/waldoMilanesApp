@@ -1,7 +1,7 @@
 import React from "react";
 
 import Store from './src/store/store'
-import './src/i18n';
+import './i18n';
 
 // eslint-disable-next-line react/prop-types
  const wrapRootElement = ({ element }) => {

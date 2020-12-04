@@ -3,7 +3,7 @@ import './Dashboard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faLanguage } from '@fortawesome/free-solid-svg-icons';
 import { Context } from '../../store/store';
-import i18n from '../../i18n';
+import i18n from '../../../i18n';
 
 
 const Settings = () => {
