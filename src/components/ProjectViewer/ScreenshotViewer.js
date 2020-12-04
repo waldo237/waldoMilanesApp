@@ -11,22 +11,7 @@ const ScreenshotViewer = ({screenshot, title})=>{
           rel="noopener noreferrer"
         >
           <div className="project-screenshot-container">
-            {/* <picture>
-              <source
-                media="(min-width:650px)"
-                srcSet={screenshot}
-              />
-              <source
-                media="(min-width:465px)"
-                srcSet={screenshot}
-              />
-              <img
-                className="project-screenshot"
-                src={screenshot}
-                alt={`${title}-view`}
-              />
-            </picture> */}
-            <Img fluid={screenshot} alt={`${title}-view`} />
+            <Img className="project-screenshot" fluid={screenshot} alt={`${title}-view`} />
           </div>
         </a>
       </>
