@@ -39,6 +39,15 @@ const   getComments =(options)=>{
  */
 const   getRating =(options)=>{
   const { itemId, setErrors, pathname, setRating } = options;
+  fetch(`${envURL}${pathname}/rating/${itemId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    }
+  })
+    .then((res)=>res.json()) 
+    .then(setRating)
+    .catch(console.error);
 }
 
 
