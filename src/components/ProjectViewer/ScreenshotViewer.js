@@ -2,7 +2,7 @@ import React from 'react';
 import PropsType from 'prop-types'
 import Img from "gatsby-image"
 
-const ScreenshotViewer = ({screenshot, title})=>{
+const ScreenshotViewer = ({screenshotImage, screenshot, title})=>{
     return (
       <>
         <a
@@ -11,7 +11,7 @@ const ScreenshotViewer = ({screenshot, title})=>{
           rel="noopener noreferrer"
         >
           <div className="project-screenshot-container">
-            <Img className="project-screenshot" fluid={screenshot} alt={`${title}-view`} />
+            <Img className="project-screenshot" fluid={screenshotImage} alt={`${title}-view`} />
           </div>
         </a>
       </>
@@ -19,7 +19,9 @@ const ScreenshotViewer = ({screenshot, title})=>{
 }
 
 ScreenshotViewer.propTypes= {
+    // eslint-disable-next-line react/forbid-prop-types
+    screenshotImage: PropsType.object.isRequired,
     screenshot: PropsType.string.isRequired,
-    title: PropsType.string.isRequired
+    title: PropsType.string.isRequired,
 }
 export default ScreenshotViewer;

@@ -113,7 +113,7 @@ const projectArray = pageContext? [pageContext]:[]
                   // eslint-disable-next-line react/jsx-indent
                  
                   <div className="project-container light" key={project._id}>
-                    <ScreenshotViewer screenshot={project.screenshot} title={project.title} />
+                    <ScreenshotViewer screenshotImage={project.screenshotImage} screenshot={project.screenshot} title={project.title} />
                     <div className='project-description-container'>
                       <h1 className="project-title primary--text">
                         {project.title}

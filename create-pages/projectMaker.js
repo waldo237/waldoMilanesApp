@@ -70,7 +70,7 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
         createPage({
           path: `project/${project.technology}`,
           component: slash(projectViewer),
-          context: { ...project, screenshot: fluidImages },
+          context: { ...project, screenshotImage: fluidImages },
         });
       });
   })

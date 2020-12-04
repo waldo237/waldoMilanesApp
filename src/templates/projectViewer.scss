@@ -3,8 +3,15 @@
 .project-viewer-container{
   width: 100%;
   display: grid;
-  flex-direction: 1% 98% 1%;
+  grid-template-columns: 1% 98% 1%;
    padding-bottom: 30px;
+   @include bp(desktop){
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+   }
   .project-viewer-title {
     @extend .page-default-title;
   }
@@ -14,6 +21,9 @@
   @extend .flex-row-space-evenly;
   grid-column: 2/3;
   width: 100%;
+  @include bp(desktop){
+   margin: auto;
+ }
   .project-container {
     @extend .shadow;
     @extend .round-edges;
@@ -25,10 +35,12 @@
     margin: auto;
     // width: calc(95% - 60px); 
     @include bp(tablet){
-      width: 80%;    
-     }
-   @include bp(desktop){
-    width: 50%;    
+      width: 80%;
+    }
+    @include bp(desktop){
+      width: 50%;    
+      // min-width: 800px; 
+      clear: both;   
    }
    .project-screenshot-container{
       // @extend .flex-column;
