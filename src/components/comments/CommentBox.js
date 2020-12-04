@@ -9,17 +9,22 @@ import { ClickAwayCloser, removeDisplayNone } from '../Nav/ClickAwayCloser';
 import commentValidator from './commentValidator';
 import ResponseAlert from '../ResponseAlert/ResponseAlert';
 import ErrorCard from '../ErrorCard/ErrorCard';
-import { saveComment, editComment, clearCommentInput, postRating } from './commentBoxFunctions';
+import { saveComment, editComment, clearCommentInput, postRating, getComments, getRating } from './commentBoxFunctions';
 import SignInFallback from './SignInFallback';
 import  SaveChangesBtn from './SaveChangesBtn';
-import CommentFetcher from './commentFetcher'
 
-const CommentBox = ({ setUpdated, itemId, pathname, updated, data }) => {
+
+const CommentBox = ({ setUpdated, itemId, pathname, updated}) => {
   // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([{
+    date: "2020-09-19T01:40:11.205Z",
+    _id: "5f65617b0f3d440ba831f52c",
+    comment: "no comment",
+    userId: "5f221a90a53baf4da8b304d3"
+  }]);
   const [rating, setRating] = useState([]);
   const [displayableErrors, setErrors] = useState([]);
   const [editingMode, setEditingMode] = useState(false);
@@ -82,17 +87,16 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated, data }) => {
   }
 
 /* effects */
-
 useEffect(() => {
-
+  getComments(options);
+  getRating(options);
 }, [updated])
-
 
 
   return (
     <>
       <div className='comment-box-action'>
-        <CommentFetcher />
+    
         <p>
           <span
             onClick={()=>postRating({...options, rating:"like"})}
@@ -168,7 +172,8 @@ useEffect(() => {
       </div>
 
       {
-        comments.map((comment) => (
+        (comments && comments.length)
+        ?comments.map((comment) => (
           <div className="comment-display" key={comment._id}>
             { (state.profile._id === comment.userId)
               ? (
@@ -213,6 +218,7 @@ useEffect(() => {
           </div>
         )
         )
+        :null
       }
     </>
   )

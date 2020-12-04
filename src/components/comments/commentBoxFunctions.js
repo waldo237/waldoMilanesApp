@@ -11,14 +11,35 @@ const clearCommentInput = () => {
 }
 
 /**
- * @function getComments get the comments from graphql.
+ * @function getComments get the comments  by calling the API.
  * @param options:object containing the other parameters
  * @param {*} itemId :string the uid of the item subject to the comment.
  * @param {*} setErrors :function useState(errors:array)
  * @param {*} pathname:string -- a URI
  */
-
-
+const   getComments =(options)=>{
+  const { itemId, setErrors, pathname, setComments } = options;
+  
+  fetch(`${envURL}${pathname}/comment/${itemId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    }
+  })
+    .then((res)=>res.json()) 
+    .then(setComments)
+    .catch(console.error);
+}
+/**
+ * @function getRating get the getRating by calling the API.
+ * @param options:object containing the other parameters
+ * @param {*} itemId :string the uid of the item subject to the comment.
+ * @param {*} setErrors :function useState(errors:array)
+ * @param {*} pathname:string -- a URI
+ */
+const   getRating =(options)=>{
+  const { itemId, setErrors, pathname, setRating } = options;
+}
 
 
 /**
@@ -200,4 +221,4 @@ const postRating = (options) => {
     .catch(console.error);
 
 }
-export { saveComment, editComment, clearCommentInput, deleteComment, postRating };
+export { saveComment, editComment, clearCommentInput, deleteComment, postRating, getComments, getRating };
