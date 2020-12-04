@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faShareAlt, faCommentAlt, faThumbsDown, faThumbsUp, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import './CommentBox.scss'
@@ -13,27 +13,34 @@ import { saveComment, editComment, clearCommentInput, postRating } from './comme
 import SignInFallback from './SignInFallback';
 import  SaveChangesBtn from './SaveChangesBtn';
 
-const CommentBox = ({ setUpdated, itemId, pathname, comments, rating }) => {
+const CommentBox = ({ setUpdated, itemId, pathname, updated }) => {
+  // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
+
+  const [comments, setComments] = useState([]);
+  const [rating, setRating] = useState([]);
+  const [displayableErrors, setErrors] = useState([]);
   const [editingMode, setEditingMode] = useState(false);
   const [response, setResponse] = useState(null);
   const [requestStarted, setRequest] = useState(false);
-  const [displayableErrors, setErrors] = useState([]);
   const [selectedComment, setSelectedComment] = useState(null);
   const [commentInput, setCommentInput] = useState("");
   const [fallback, setFallBack] = useState(false);
 
-  const inputHandler = (event) => {
-    setCommentInput(event.target.value);
-    setErrors(commentValidator(commentInput).errors);
-  };
   const userId = state.profile._id;
   const { isLoggedIn } = state;
   const options = ({
     userId, commentInput, itemId, setRequest, setEditingMode,
-    setResponse, setErrors, pathname, setUpdated
+    setResponse, setErrors, pathname, setUpdated,
+    setComments, setRating
   });
+  
+  /* actions */
+  const inputHandler = (event) => {
+    setCommentInput(event.target.value);
+    setErrors(commentValidator(commentInput).errors);
+  };
 
   const handleKeyPress = (event, comment) => {
     if (event.key === 'Enter') {
@@ -72,6 +79,15 @@ const CommentBox = ({ setUpdated, itemId, pathname, comments, rating }) => {
     selectElementContents(textInput);
     }
   }
+
+/* effects */
+useEffect(() => {
+  
+  return () => {
+    cleanup
+  }
+}, [updated])
+
 
 
   return (

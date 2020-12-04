@@ -9,6 +9,8 @@ const clearCommentInput = () => {
     .value = '';
   }
 }
+
+
 /**
  * @function saveComment posts new rating to the server.
  * @param options:object containing the other parameters

@@ -175,7 +175,7 @@ const projectArray = pageContext? [pageContext]:[]
                         ))}
                       </>
                     </div>
-                    <CommentBox setUpdated={setUpdated} itemId={project._id} pathname="/project" comments={project.comments} rating={project.rating} />
+                    <CommentBox updated={updated} setUpdated={setUpdated} itemId={project._id} pathname="/project" comments={project.comments} rating={project.rating} />
                   </div>
                 ))
                 : (
