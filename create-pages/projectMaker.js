@@ -1,6 +1,9 @@
 const { slash } = require(`gatsby-core-utils`);
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const {fluid}= require('gatsby-plugin-sharp');
+
 const projectViewer = require.resolve(`../src/templates/projectViewer.js`);
-const fs   = require('fs')
+
 // Get all the projects.
 const GET_PROJECTS = `
 query GET_PROJECTS {
@@ -33,42 +36,44 @@ query GET_PROJECTS {
 }
 `;
 
-module.exports = async ({ actions, graphql }) => {
-    const { createPage } = actions;
+module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, createPage, createNode }) => {
 
-    const savePhotosInJson =  () => {
-      return  graphql(GET_PROJECTS)
-          .then(({ data }) => {
-              const { HWGraphQL: { projects } } = data;
-           return projects.map((project)=> ({url:project.screenshot, id:project._id})
-                )
-              })
-              .then((data)=>{
-                fs.writeFileSync('urlPhotos.json', JSON.stringify(data))
+  const generateImages = async (node) => {
+      const fileNode = await createRemoteFileNode({
+        url: node.screenshot,
+        parentNodeId: node._id,
+        getCache,
+        createNode,
+        createNodeId,
+      });
 
-              })
+      const generatedImage = await fluid({
+        file: fileNode,
+        reporter,
+        cache,
+      });
+
+    return generatedImage;
   };
 
-  savePhotosInJson();
-    const fetchProject = async () => {
-        return await graphql(GET_PROJECTS)
-            .then(({ data }) => {
-                const { HWGraphQL: { projects } } = data;
-                return { projects };
-            });
-    };
+  const fetchProject = async () => {
+    // eslint-disable-next-line no-return-await
+    return await graphql(GET_PROJECTS)
+      .then(({ data }) => {
+        const { HWGraphQL: { projects } } = data;
+        return { projects };
+      });
+  };
 
-    await fetchProject().then(({ projects }) => {
-        projects &&
-            projects.map((page) => {
-                createPage({
-                    path: `project/${page.technology}`,
-                    component: slash(projectViewer),
-                    context: { ...page },
-                });
-
-            });
-
-    })
-
+  
+  await fetchProject().then(({ projects }) => {
+    projects.map(async(project) => {
+      const fluidImages = await generateImages(project);
+        createPage({
+          path: `project/${project.technology}`,
+          component: slash(projectViewer),
+          context: { ...project, screenshot: fluidImages },
+        });
+      });
+  })
 };

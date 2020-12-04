@@ -1,12 +1,11 @@
 /* eslint-disable no-param-reassign */
 const fs = require('fs');
-const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const createAllProjects = require( './create-pages/projectMaker' );
 
 
 exports.createPages = async ({ actions, graphql, getCache, createNodeId, cache, reporter }) => {
   const { createPage, createNode } = actions; 
-  await createAllProjects( { actions, graphql, getCache, createNodeId, cache, reporter, createPage, createNode } );
+  await createAllProjects( { graphql, getCache, createNodeId, cache, reporter, createPage, createNode } );
 }
 
 exports.onCreatePage = async ({ page, actions }) => {
