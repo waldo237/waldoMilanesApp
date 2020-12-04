@@ -12,8 +12,9 @@ import ErrorCard from '../ErrorCard/ErrorCard';
 import { saveComment, editComment, clearCommentInput, postRating } from './commentBoxFunctions';
 import SignInFallback from './SignInFallback';
 import  SaveChangesBtn from './SaveChangesBtn';
+import CommentFetcher from './commentFetcher'
 
-const CommentBox = ({ setUpdated, itemId, pathname, updated }) => {
+const CommentBox = ({ setUpdated, itemId, pathname, updated, data }) => {
   // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
@@ -81,11 +82,9 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated }) => {
   }
 
 /* effects */
+
 useEffect(() => {
-  
-  return () => {
-    cleanup
-  }
+
 }, [updated])
 
 
@@ -93,6 +92,7 @@ useEffect(() => {
   return (
     <>
       <div className='comment-box-action'>
+        <CommentFetcher />
         <p>
           <span
             onClick={()=>postRating({...options, rating:"like"})}
@@ -242,5 +242,4 @@ CommentBox.defaultProps = {
     userId: "5f221a90a53baf4da8b304d3"
   }]
 }
-
 export default CommentBox; 

@@ -10,6 +10,16 @@ const clearCommentInput = () => {
   }
 }
 
+/**
+ * @function getComments get the comments from graphql.
+ * @param options:object containing the other parameters
+ * @param {*} itemId :string the uid of the item subject to the comment.
+ * @param {*} setErrors :function useState(errors:array)
+ * @param {*} pathname:string -- a URI
+ */
+
+
+
 
 /**
  * @function saveComment posts new rating to the server.
