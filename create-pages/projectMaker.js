@@ -46,13 +46,11 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
         createNode,
         createNodeId,
       });
-
       const generatedImage = await fluid({
         file: fileNode,
         reporter,
         cache,
       });
-
     return generatedImage;
   };
 
