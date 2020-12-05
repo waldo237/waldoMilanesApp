@@ -9,21 +9,22 @@ import { ClickAwayCloser, removeDisplayNone } from '../Nav/ClickAwayCloser';
 import commentValidator from './commentValidator';
 import ResponseAlert from '../ResponseAlert/ResponseAlert';
 import ErrorCard from '../ErrorCard/ErrorCard';
-import { saveComment, editComment, clearCommentInput, postRating, getComments, getRating } from './commentBoxFunctions';
+import { saveComment, editComment, clearCommentInput, postRating, getComments, getRating, shareLink } from './commentBoxFunctions';
 import SignInFallback from './SignInFallback';
 import  SaveChangesBtn from './SaveChangesBtn';
+import DefaultShareModal from './defaultShareModal';
 
 
-const CommentBox = ({ setUpdated, itemId, pathname, updated}) => {
+const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
   // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
 
   const [comments, setComments] = useState([{
-    date: "2020-09-19T01:40:11.205Z",
-    _id: "5f65617b0f3d440ba831f52c",
-    comment: "no comment",
-    userId: "5f221a90a53baf4da8b304d3"
+    date: "00000000",
+    _id: "00000000",
+    comment: " _",
+    userId: "00000000"
   }]);
   const [rating, setRating] = useState([]);
   const [displayableErrors, setErrors] = useState([]);
@@ -39,7 +40,7 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated}) => {
   const options = ({
     userId, commentInput, itemId, setRequest, setEditingMode,
     setResponse, setErrors, pathname, setUpdated,
-    setComments, setRating
+    setComments, setRating, infoToShare
   });
   
   /* actions */
@@ -90,6 +91,7 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated}) => {
 useEffect(() => {
   getComments(options);
   getRating(options);
+
 }, [updated])
 
 
@@ -128,11 +130,13 @@ useEffect(() => {
         />{" "}
           <Trans i18nKey='commentBox.comments'>Comments</Trans>
         </p>
-        <p> <FontAwesomeIcon
-          className="fa-lg"
-          icon={faShareAlt}
-        />{" "}<Trans i18nKey='commentBox.share'>Share</Trans>
-        </p>
+        <div className="shareBtn" onKeyDown={()=>shareLink(options)} onClick={()=>shareLink(options)}>
+          <p> <FontAwesomeIcon
+            className="fa-lg"
+            icon={faShareAlt}
+          />{" "}<Trans i18nKey='commentBox.share'>Share</Trans>
+          </p>
+        </div>
       </div>
 
 
@@ -166,7 +170,7 @@ useEffect(() => {
               onClick={() => saveComment(options)}
               onKeyDown={() => saveComment(options)}
             />
-          )}
+            )}
             </div>
 )}
       </div>
@@ -213,13 +217,11 @@ useEffect(() => {
               minute:'2-digit'
             })}
             </small>
-
-
           </div>
-        )
-        )
+        ))
         :null
       }
+      <DefaultShareModal />
     </>
   )
 }

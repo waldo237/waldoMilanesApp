@@ -5,10 +5,37 @@ import commentValidator from "./commentValidator";
 
 const clearCommentInput = () => {
   if (typeof window !== `undefined`) {
-  document.getElementById('comment-input')
-    .value = '';
+    document.getElementById('comment-input')
+      .value = '';
   }
 }
+
+/**
+ * @function shareLink Uses the browser share API to allow users
+ * to share the link of the current page.
+ * @param options:object containing the other parameters
+ */
+
+const shareLink = async (options) => {
+  const { infoToShare } = options;
+  try {
+    if (typeof window !== `undefined`) {
+      if (navigator.share !== undefined) {
+        await navigator.share(infoToShare).then(() => {
+          console.log('Thanks for sharing!');
+        })
+      } else {
+        const shareDialog = document.querySelector('.share-dialog');
+        shareDialog.classList.add('is-open');
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
 
 /**
  * @function getComments get the comments  by calling the API.
@@ -17,16 +44,16 @@ const clearCommentInput = () => {
  * @param {*} setErrors :function useState(errors:array)
  * @param {*} pathname:string -- a URI
  */
-const   getComments =(options)=>{
+const getComments = (options) => {
   const { itemId, setErrors, pathname, setComments } = options;
-  
+
   fetch(`${envURL}${pathname}/comment/${itemId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     }
   })
-    .then((res)=>res.json()) 
+    .then((res) => res.json())
     .then(setComments)
     .catch(console.error);
 }
@@ -37,7 +64,7 @@ const   getComments =(options)=>{
  * @param {*} setErrors :function useState(errors:array)
  * @param {*} pathname:string -- a URI
  */
-const   getRating =(options)=>{
+const getRating = (options) => {
   const { itemId, setErrors, pathname, setRating } = options;
   fetch(`${envURL}${pathname}/rating/${itemId}`, {
     method: "GET",
@@ -45,7 +72,7 @@ const   getRating =(options)=>{
       "Content-Type": "application/json;charset=utf-8",
     }
   })
-    .then((res)=>res.json()) 
+    .then((res) => res.json())
     .then(setRating)
     .catch(console.error);
 }
@@ -230,4 +257,4 @@ const postRating = (options) => {
     .catch(console.error);
 
 }
-export { saveComment, editComment, clearCommentInput, deleteComment, postRating, getComments, getRating };
+export { saveComment, editComment, clearCommentInput, deleteComment, postRating, getComments, getRating, shareLink };

@@ -4,7 +4,7 @@ import Proptypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLink,
-  faCalendarCheck, 
+  faCalendarCheck,
   faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
 import { isEmpty } from 'lodash';
@@ -17,11 +17,12 @@ import { Context } from '../store/store'
 import SEO from "../components/seo";
 import Directory from "../components/ProjectViewer/Directory";
 import File from "../components/ProjectViewer/File";
+import envURL from "../envURL";
 
 const ProjectViewer = ({ pageContext }) => {
-	if ( isEmpty( pageContext ) ) {
+  if (isEmpty(pageContext)) {
     return null;
-	}
+  }
 
 
   const technologySwicher = () => {
@@ -50,8 +51,8 @@ const ProjectViewer = ({ pageContext }) => {
   const [state] = useContext(Context);
   const { Trans } = state;
   const [updated, setUpdated] = useState(false);
-   
-const projectArray = pageContext? [pageContext]:[]
+
+  const projectArray = pageContext ? [pageContext] : []
   const showModal = (value) => {
     if (typeof window !== `undefined`) {
       const internalFiles = document.querySelectorAll(".modal");
@@ -93,7 +94,7 @@ const projectArray = pageContext? [pageContext]:[]
             <header className="project-viewer-title">
               <div className='page-default-title-icon'>
                 <IconizeFile name={pageContext.technology} usingExtension />
-                
+
               </div>
               <div>
                 <h1 className="primary--text">
@@ -108,84 +109,89 @@ const projectArray = pageContext? [pageContext]:[]
             </header>
             <article className="all-projects fadeInUpx">
               {
-             
-             projectArray && projectArray.length
-                ? projectArray.map((project) => (
-                  // eslint-disable-next-line react/jsx-indent
-                 
-                  <div className="project-container light" key={project._id}>
-                    <ScreenshotViewer screenshotImage={project.screenshotImage} screenshot={project.screenshot} title={project.title} />
-                    <div className='project-description-container'>
-                      <h1 className="project-title primary--text">
-                        {project.title}
-                       
-                      </h1>
-                      <p>
-                        <span className="project-description-label">
-                          <FontAwesomeIcon
-                            icon={faCalendarCheck}
-                            className="secondary--text"
-                          />
-                          {" "}
-                          <Trans i18nKey='projectViewer.updated'>Updated on:</Trans>
-                        </span>{" "}
-                        {new Date(project.date).toLocaleString("eng-US", {
-                          dateStyle: "long",
-                        })}
-                      </p>
-                      <p>
-                        <span className="project-description-label">
-                          <FontAwesomeIcon
-                            icon={faLink}
-                            className="secondary--text"
-                          />
-                          {" "}
-                          URL:
-                        </span>{" "}
-                        <a
-                          target="_blank"
-                          href={project.url}
-                          rel="noopener noreferrer"
-                        >
-                          {project.url}
-                        </a>
-                      </p>
-                      <p>
-                        <span className="project-description-label">
-                          <FontAwesomeIcon
-                            icon={faCertificate}
-                            className="secondary--text"
-                          />
-                          {" "}
-                          <Trans i18nKey='projectViewer.description'>Description:</Trans>
-                        </span>{" "}
-                        {project.description}
-                      </p>
-                    </div>
 
-                    <div className="file-container">
-                      <span className="bold"><Trans i18nKey='projectViewer.files'>Files</Trans></span>
-                      <>
-                        {(project.code.file)
-                          ? <File showModal={showModal} file={project.code.file} />
-                          : null}
+                projectArray && projectArray.length
+                  ? projectArray.map((project) => (
+                    // eslint-disable-next-line react/jsx-indent
 
-                        {project.code.dir.map((folder) => (
-                          <Directory key={folder._id} folder={folder} toggleClasses={toggleClasses} showModal={showModal} />
-                        ))}
-                      </>
+                    <div className="project-container light" key={project._id}>
+                      <ScreenshotViewer screenshotImage={project.screenshotImage} screenshot={project.screenshot} title={project.title} />
+                      <div className='project-description-container'>
+                        <h1 className="project-title primary--text">
+                          {project.title}
+
+                        </h1>
+                        <p>
+                          <span className="project-description-label">
+                            <FontAwesomeIcon
+                              icon={faCalendarCheck}
+                              className="secondary--text"
+                            />
+                            {" "}
+                            <Trans i18nKey='projectViewer.updated'>Updated on:</Trans>
+                          </span>{" "}
+                          {new Date(project.date).toLocaleString("eng-US", {
+                            dateStyle: "long",
+                          })}
+                        </p>
+                        <p>
+                          <span className="project-description-label">
+                            <FontAwesomeIcon
+                              icon={faLink}
+                              className="secondary--text"
+                            />
+                            {" "}
+                            URL:
+                          </span>{" "}
+                          <a
+                            target="_blank"
+                            href={project.url}
+                            rel="noopener noreferrer"
+                          >
+                            {project.url}
+                          </a>
+                        </p>
+                        <p>
+                          <span className="project-description-label">
+                            <FontAwesomeIcon
+                              icon={faCertificate}
+                              className="secondary--text"
+                            />
+                            {" "}
+                            <Trans i18nKey='projectViewer.description'>Description:</Trans>
+                          </span>{" "}
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="file-container">
+                        <span className="bold"><Trans i18nKey='projectViewer.files'>Files</Trans></span>
+                        <>
+                          {(project.code.file)
+                            ? <File showModal={showModal} file={project.code.file} />
+                            : null}
+
+                          {project.code.dir.map((folder) => (
+                            <Directory key={folder._id} folder={folder} toggleClasses={toggleClasses} showModal={showModal} />
+                          ))}
+                        </>
+                      </div>
+                      <CommentBox
+                        infoToShare={{ title: project.title, description: project.description, url: `${envURL}'project'` }} 
+                      
+                        itemId={project._id}
+                        pathname="/project"
+                      />
                     </div>
-                    <CommentBox updated={updated} setUpdated={setUpdated} itemId={project._id} pathname="/project" comments={project.comments} rating={project.rating} />
-                  </div>
-                ))
-                : (
-                  <article className="all-projects">
-                    <Loading message={`Loading the ${technology.title} projects!
+                  ))
+                  : (
+                    <article className="all-projects">
+                      <Loading message={`Loading the ${technology.title} projects!
               If it's taking too long, you should probably come back later`}
-                    />
-                  </article>
-                )
-}
+                      />
+                    </article>
+                  )
+              }
             </article>
           </main>
         )
