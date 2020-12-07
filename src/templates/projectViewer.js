@@ -50,7 +50,7 @@ const ProjectViewer = ({ pageContext }) => {
 
   const [state] = useContext(Context);
   const { Trans } = state;
-  const [updated, setUpdated] = useState(false);
+
 
   const projectArray = pageContext ? [pageContext] : []
   const showModal = (value) => {
@@ -178,9 +178,9 @@ const ProjectViewer = ({ pageContext }) => {
                       </div>
                       <CommentBox
                         infoToShare={{ title: project.title, description: project.description, url: `${envURL}'project'` }} 
-                      
                         itemId={project._id}
                         pathname="/project"
+                        updated
                       />
                     </div>
                   ))

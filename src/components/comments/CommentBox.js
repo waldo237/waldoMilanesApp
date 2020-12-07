@@ -11,11 +11,11 @@ import ResponseAlert from '../ResponseAlert/ResponseAlert';
 import ErrorCard from '../ErrorCard/ErrorCard';
 import { saveComment, editComment, clearCommentInput, postRating, getComments, getRating, shareLink } from './commentBoxFunctions';
 import SignInFallback from './SignInFallback';
-import  SaveChangesBtn from './SaveChangesBtn';
-import DefaultShareModal from './defaultShareModal';
+import SaveChangesBtn from './SaveChangesBtn';
+import DefaultShareModal from './DefaultShareModal';
 
 
-const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
+const CommentBox = ({  itemId, pathname,  infoToShare }) => {
   // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
@@ -26,6 +26,7 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
     comment: " _",
     userId: "00000000"
   }]);
+  const [updated, setUpdated] = useState(false);
   const [rating, setRating] = useState([]);
   const [displayableErrors, setErrors] = useState([]);
   const [editingMode, setEditingMode] = useState(false);
@@ -42,7 +43,7 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
     setResponse, setErrors, pathname, setUpdated,
     setComments, setRating, infoToShare
   });
-  
+
   /* actions */
   const inputHandler = (event) => {
     setCommentInput(event.target.value);
@@ -51,11 +52,11 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
 
   const handleKeyPress = (event, comment) => {
     if (event.key === 'Enter') {
-      if(editingMode){ 
+      if (editingMode) {
         editComment({ ...options, comment })
-    }else{
-      saveComment(options);
-    }
+      } else {
+        saveComment(options);
+      }
     }
   }
   const openCommentOptions = (comment) => {
@@ -68,58 +69,58 @@ const CommentBox = ({ setUpdated, itemId, pathname, updated, infoToShare}) => {
 
   function selectElementContents(el) {
     if (typeof window !== `undefined`) {
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
     }
   }
   const handleEditing = (comment) => {
     if (typeof window !== `undefined`) {
-    setEditingMode(true);
-    setSelectedComment(comment)
-    const textInput = document.getElementById('comment-input');
-    textInput.value = comment.comment;
-    setCommentInput(comment.comment);
-    textInput.focus({ preventScroll: false }); // check if it works without it
-    selectElementContents(textInput);
+      setEditingMode(true);
+      setSelectedComment(comment)
+      const textInput = document.getElementById('comment-input');
+      textInput.value = comment.comment;
+      setCommentInput(comment.comment);
+      textInput.focus({ preventScroll: false }); // check if it works without it
+      selectElementContents(textInput);
     }
   }
 
-/* effects */
-useEffect(() => {
-  getComments(options);
-  getRating(options);
+  /* effects */
+  useEffect(() => {
+    getComments(options);
+    getRating(options);
 
-}, [updated])
+  }, [updated])
 
 
   return (
     <>
       <div className='comment-box-action'>
-    
+
         <p>
           <span
-            onClick={()=>postRating({...options, rating:"like"})}
-            onKeyDown={()=>postRating({...options, rating:"like"})}
+            onClick={() => postRating({ ...options, rating: "like" })}
+            onKeyDown={() => postRating({ ...options, rating: "like" })}
           >
-            <small>{rating.filter((rate) => rate === "like").length}</small> {" "}
+            <small>{rating.length ? rating.filter((rate) => rate === "like").length : 0}</small> {" "}
             <FontAwesomeIcon
               className="fa-lg"
               icon={faThumbsUp}
             />{" "}
           </span>
           <span
-            onClick={()=>postRating({...options, rating:"dislike"})}
-            onKeyDown={()=>postRating({...options, rating:"dislike"})}
+            onClick={() => postRating({ ...options, rating: "dislike" })}
+            onKeyDown={() => postRating({ ...options, rating: "dislike" })}
           >
             <FontAwesomeIcon
               className="fa-lg fa-flip-horizontal	"
               icon={faThumbsDown}
             />
             {" "}
-            <small>{rating.filter((rate) => rate === "dislike").length}</small>
+            <small>{rating.length ? rating.filter((rate) => rate === "dislike").length : 0}</small>
             {" "}
           </span>
           {/* <Trans i18nKey='commentBox.impression'>Impression</Trans> */}
@@ -130,7 +131,7 @@ useEffect(() => {
         />{" "}
           <Trans i18nKey='commentBox.comments'>Comments</Trans>
         </p>
-        <div className="shareBtn" onKeyDown={()=>shareLink(options)} onClick={()=>shareLink(options)}>
+        <div className="shareBtn" onKeyDown={() => shareLink(options)} onClick={() => shareLink(options)}>
           <p> <FontAwesomeIcon
             className="fa-lg"
             icon={faShareAlt}
@@ -144,7 +145,7 @@ useEffect(() => {
         {(fallback)
           ? <SignInFallback />
           : (
-            <div className='comment-box-comment'> 
+            <div className='comment-box-comment'>
               <div className="form-group">
                 <label className="input" htmlFor="comment-input"> <Trans i18nKey='commentBox.write'>Write a comment</Trans>
                   <input
@@ -153,101 +154,90 @@ useEffect(() => {
                     type="text"
                     className="form-control"
                     placeholder="Write a comment"
-                    onKeyDown={(e)=> handleKeyPress(e, selectedComment)}
+                    onKeyDown={(e) => handleKeyPress(e, selectedComment)}
                     onChange={(isLoggedIn) ? inputHandler : () => setFallBack(true)}
                   />
                 </label>
                 {response ? (<ResponseAlert response={response} setResponse={setResponse} />) : null}
                 {(displayableErrors) ? <ErrorCard errors={displayableErrors} setErrors={setErrors} /> : null}
               </div>
-          
+
               {(editingMode)
-          ? <SaveChangesBtn options={options} comment={selectedComment} requestStarted={requestStarted} />
-          : (
-            <FontAwesomeIcon
-              className="fa-lg"
-              icon={faPaperPlane}
-              onClick={() => saveComment(options)}
-              onKeyDown={() => saveComment(options)}
-            />
-            )}
+                ? <SaveChangesBtn options={options} comment={selectedComment} requestStarted={requestStarted} />
+                : (
+                  <FontAwesomeIcon
+                    className="fa-lg"
+                    icon={faPaperPlane}
+                    onClick={() => saveComment(options)}
+                    onKeyDown={() => saveComment(options)}
+                  />
+                )}
             </div>
-)}
+          )}
       </div>
 
       {
         (comments && comments.length)
-        ?comments.map((comment) => (
-          <div className="comment-display" key={comment._id}>
-            { (state.profile._id === comment.userId)
-              ? (
-                <div>
-                  <FontAwesomeIcon
-                    id={`comment-options-btn-${comment._id}`}
-                    className="comment-btn"
-                    icon={faEllipsisH}
-                    onClick={() => openCommentOptions(comment)}
-                    onKeyDown={() => openCommentOptions(comment)}
+          ? comments.map((comment) => (
+            <div className="comment-display" key={comment._id}>
+              { (state.profile._id === comment.userId)
+                ? (
+                  <div>
+                    <FontAwesomeIcon
+                      id={`comment-options-btn-${comment._id}`}
+                      className="comment-btn"
+                      icon={faEllipsisH}
+                      onClick={() => openCommentOptions(comment)}
+                      onKeyDown={() => openCommentOptions(comment)}
 
-                  />
+                    />
 
-                  {(!editingMode)
-                    ? (
-                      <ClickAwayCloser exceptionById={`comment-options-btn-${comment._id}`}>
-                        <CommentActions comment={comment} handleEditing={handleEditing} options={options} />
-                      </ClickAwayCloser>
-                    )
-                    : null}
-                </div>
-              )
-              : null}
-            <div className='comment-text-container'>
-              <p
-                className={(editingMode) ? `being-edited comment-text-${comment._id}` : `comment-text-${comment._id}`}
-              >
-                {comment.comment}
-              </p>
+                    {(!editingMode)
+                      ? (
+                        <ClickAwayCloser exceptionById={`comment-options-btn-${comment._id}`}>
+                          <CommentActions comment={comment} handleEditing={handleEditing} options={options} />
+                        </ClickAwayCloser>
+                      )
+                      : null}
+                  </div>
+                )
+                : null}
+              <div className='comment-text-container'>
+                <p
+                  className={(editingMode) ? `being-edited comment-text-${comment._id}` : `comment-text-${comment._id}`}
+                >
+                  {comment.comment}
+                </p>
+              </div>
+
+              <small className={(editingMode) ? `being-edited` : ''}>{new Date(comment.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: '2-digit',
+                year: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+              </small>
             </div>
-
-            <small className={(editingMode) ? `being-edited`:''}>{new Date(comment.date).toLocaleDateString('en-US', {
-              month: 'short',
-              day: '2-digit',
-              year: '2-digit',
-              hour: '2-digit',
-              minute:'2-digit'
-            })}
-            </small>
-          </div>
-        ))
-        :null
+          ))
+          : null
       }
-      <DefaultShareModal />
+      <DefaultShareModal infoToShare={infoToShare} />
     </>
   )
 }
 CommentBox.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    comment: PropTypes.string,
-    date: PropTypes.string,
-    _id: PropTypes.string,
-    userId: PropTypes.string
-  })),
 
-  itemId: PropTypes.string,
+  infoToShare: PropTypes.shape(
+    { 
+      title: PropTypes.string.isRequired,
+       description: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired 
+      }
+      ).isRequired,
+  itemId: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
-  rating: PropTypes.arrayOf(PropTypes.oneOf(["like", "dislike"])),
-  setUpdated: PropTypes.func.isRequired,
-  
+
 }
 
-CommentBox.defaultProps = {
-  rating: ['like'],
-  itemId: "",
-  comments: [{
-    date: "2020-09-19T01:40:11.205Z",
-    _id: "5f65617b0f3d440ba831f52c",
-    comment: "no comment",
-    userId: "5f221a90a53baf4da8b304d3"
-  }]
-}
 export default CommentBox; 

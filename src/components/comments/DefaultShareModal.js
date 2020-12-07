@@ -1,16 +1,14 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from 'react'
 import './DefaultShareModal.scss'
 
- const   DefaultShareModal=() =>{
+ const   DefaultShareModal=({infoToShare}) =>{
   
   useEffect(() => {
   
     const shareDialog = document.querySelector('.share-dialog');
     const closeButton = document.querySelector('.close-button');
-    
-
-    
-    closeButton.addEventListener('click', event => {
+    closeButton.addEventListener('click', () => {
       shareDialog.classList.remove('is-open');
     });
   
@@ -21,7 +19,7 @@ import './DefaultShareModal.scss'
         <div className="share-dialog">
           <header>
             <h3 className="dialog-title">Share</h3>
-            <button className="close-button"><svg><use href="#close" /></svg></button>
+            <button type='button' className="close-button"><svg><use href="#close" /></svg></button>
           </header>
           <div className="targets">
             <a className="button">
@@ -53,8 +51,8 @@ import './DefaultShareModal.scss'
             </a>
           </div>
           <div className="link">
-            <div className="pen-url">https://codepen.io/ayoisaiah/pen/YbNazJ</div>
-            <button className="copy-link">Copy Link</button>
+            <div className="pen-url">{infoToShare.url}</div>
+            <button type='button' className="copy-link">Copy Link</button>
           </div>
         </div>
 
@@ -75,6 +73,16 @@ import './DefaultShareModal.scss'
         </svg>
       </div>
     )
+}
+
+DefaultShareModal.propTypes = {
+  infoToShare: PropTypes.shape(
+    { 
+      title: PropTypes.string.isRequired,
+       description: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired 
+      }
+      ).isRequired,
 }
 
 export default DefaultShareModal

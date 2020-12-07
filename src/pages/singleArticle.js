@@ -5,11 +5,12 @@ import './singleArticle.scss'
 import CommentBox from '../components/comments/CommentBox';
 import { Context } from '../store/store';
 import SEO from '../components/seo';
+import {isEmpty} from 'lodash'
 
 const SingleArticle =({location})=>{
   const [state, dispatch] = useContext(Context);  
   const [articleData, setData] = useState(null);
-  const [updated, setUpdated] = useState(false);
+
 
   const fetchSelectedArticle =()=> {
     fetch(`${envURL}/article/${location.search.split('?')[1]}`)
@@ -25,7 +26,7 @@ const SingleArticle =({location})=>{
     
         fetchSelectedArticle();
     
-      }, [updated,location.pathname, location.search]);
+      }, [ location.pathname, location.search]);
 
     return (
       <>
@@ -36,7 +37,7 @@ const SingleArticle =({location})=>{
           image={state.selectedArticle.photo}
         />
         <main className='single-article-container light'>
-          {(articleData)? (
+          {(! isEmpty(articleData))? (
            
             <div className='single-article-card'>
               <h1 className='single-article-title'>{articleData.title}</h1>
@@ -55,7 +56,12 @@ const SingleArticle =({location})=>{
                     })}
               </small>
               <p className="single-article-text">{articleData.body}</p> 
-              <CommentBox setUpdated={setUpdated} itemId={articleData._id} pathname="/article" comments={articleData.comments} rating={articleData.rating} />
+              <CommentBox 
+                infoToShare={{ title: articleData.title, description: articleData.body, url: `${envURL}'article'` }} 
+                itemId={articleData._id} 
+                pathname="/article" 
+                updated
+              />
             </div>
             ):null}
         </main>
