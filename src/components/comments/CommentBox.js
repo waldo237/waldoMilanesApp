@@ -140,7 +140,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
         </div>
       </div>
 
-
+      <DefaultShareModal infoToShare={infoToShare} />
       <div className='comment-box-comment'>
         {(fallback)
           ? <SignInFallback />
@@ -222,7 +222,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
           ))
           : null
       }
-      <DefaultShareModal infoToShare={infoToShare} />
+     
     </>
   )
 }

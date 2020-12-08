@@ -177,7 +177,7 @@ const ProjectViewer = ({ pageContext }) => {
                         </>
                       </div>
                       <CommentBox
-                        infoToShare={{ title: project.title, description: project.description, url: `${envURL}'project'` }} 
+                        infoToShare={{ title: project.title, description: project.description, url: `${envURL}/project`, hash:`${project._id}` }} 
                         itemId={project._id}
                         pathname="/project"
                         updated

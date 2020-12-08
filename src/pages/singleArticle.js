@@ -57,7 +57,7 @@ const SingleArticle =({location})=>{
               </small>
               <p className="single-article-text">{articleData.body}</p> 
               <CommentBox 
-                infoToShare={{ title: articleData.title, description: articleData.body, url: `${envURL}'article'` }} 
+                infoToShare={{ title: articleData.title, description: articleData.body, url: `${envURL}/article`, hash:`${articleData._id}` }} 
                 itemId={articleData._id} 
                 pathname="/article" 
                 updated

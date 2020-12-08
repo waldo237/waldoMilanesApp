@@ -3,7 +3,14 @@ import React, { useEffect } from 'react'
 import './DefaultShareModal.scss'
 
  const   DefaultShareModal=({infoToShare}) =>{
-  
+  function copyLinkToClipboard() {
+    const copyText = document.getElementById("pen-url");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); 
+    document.execCommand("copy");
+    
+  }
+
   useEffect(() => {
   
     const shareDialog = document.querySelector('.share-dialog');
@@ -22,28 +29,38 @@ import './DefaultShareModal.scss'
             <button type='button' className="close-button"><svg><use href="#close" /></svg></button>
           </header>
           <div className="targets">
-            <a className="button">
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${infoToShare.url}#${infoToShare.hash}`} target='_blank' rel="noreferrer" className="button">
               <svg>
                 <use href="#facebook" />
               </svg>
               <span>Facebook</span>
             </a>
     
-            <a className="button">
+            <a href={`https://twitter.com/share?text=${infoToShare.title}&url=${infoToShare.url}`} target='_blank' rel="noreferrer" className="button">
               <svg>
                 <use href="#twitter" />
               </svg>
               <span>Twitter</span>
             </a>
     
-            <a className="button">
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${infoToShare.url}`} 
+              target='_blank'
+              rel="noreferrer"
+              className="button"
+            >
               <svg>
                 <use href="#linkedin" />
               </svg>
               <span>LinkedIn</span>
             </a>
     
-            <a className="button">
+            <a
+              href={`mailto:?subject=${infoToShare.title}&body=${infoToShare.description.slice(0,200)}...%0D%0A%0D%0A Find it at ${infoToShare.url}.`} 
+              target='_blank'
+              rel="noreferrer"
+              className="button"
+            >
               <svg>
                 <use href="#email" />
               </svg>
@@ -51,8 +68,8 @@ import './DefaultShareModal.scss'
             </a>
           </div>
           <div className="link">
-            <div className="pen-url">{infoToShare.url}</div>
-            <button type='button' className="copy-link">Copy Link</button>
+            <input type="text" id='pen-url' className="pen-url" value={infoToShare.url} />
+            <button type='button' className="copy-link" onClick={copyLinkToClipboard}>Copy Link</button>
           </div>
         </div>
 
@@ -79,8 +96,10 @@ DefaultShareModal.propTypes = {
   infoToShare: PropTypes.shape(
     { 
       title: PropTypes.string.isRequired,
-       description: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired 
+      description: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      hash: PropTypes.string.isRequired,
+
       }
       ).isRequired,
 }
