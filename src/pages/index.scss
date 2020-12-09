@@ -33,10 +33,12 @@
   padding: 0px 3% 0px 4%;
   margin-top: 8px;
   @include bp(desktop) {
-    min-height: 430px;
+    min-height: 420px;
     align-items: stretch;
+    justify-content: space-between;
     flex-direction: row;
-    padding: 0px 2% 0px 6%;
+    // width: 96%;
+    padding: 0px 2% 0px 2%;
     margin-top: 0px;
   }
   .elipsis-shape{
@@ -62,7 +64,7 @@
     position: relative;
     font-family: Lato, Arial, Helvetica, sans-serif;
     @include bp(desktop) {
-      width:35%;
+      width:40%;
      }
       #pragmatic-dedicated{
         font-size: 6vw;
@@ -107,9 +109,13 @@
       align-content: center;
       justify-content: center;
       width: 100%;
-      @include bp(desktop){
+      @include bp(laptop){
         padding-top: 0px;
-          width: 65%;
+          width: 60%;
+        }
+      @include bp(navigation) {
+        padding-top: 0px;
+          width: 40%;
         }
     .shapes{
       --shape-width: 30%;
@@ -129,7 +135,12 @@
           left: calc(var(--shape-width) - 105px);
           bottom: 128px;
         }
-        @include bp(desktop){
+        @include bp(laptop) {
+          width: 100px;
+          left: calc(var(--shape-width) - 100px);
+          top: 120px;
+        }
+        @include bp(navigation){
           width: 130px;
           left: calc(var(--shape-width) - 105px);
           bottom: 128px;
@@ -146,7 +157,7 @@
           top:268px;
           left: 5px; 
         }
-        @include bp(desktop){
+        @include bp(navigation){
           width: 140px;
           height: 134px;
           top:318px;
@@ -158,7 +169,7 @@
         position: relative;
         top: 40px;
         display: flex;
-        @include bp(desktop){
+        @include bp(navigation){
           top: 80px;
         }
           .wm-img {
@@ -186,7 +197,7 @@
               height: 130px;
               left: 10px;
             }
-            @include bp(desktop) {
+            @include bp(navigation) {
               background-size: 214px;
               width: 214px;
               height: 160px;
@@ -232,7 +243,7 @@
               @include bp(tablet) {
                 width: 270px;
               }
-              @include bp(desktop){
+              @include bp(navigation){
                 width: 350px;
              }
           }
@@ -246,6 +257,11 @@
         position: relative;
         animation: bounce 4s 4s   infinite;
         @include bp(desktop){
+          width: 70px;
+        top: 15px;
+        left: -20px;
+        }
+        @include bp(navigation){
           width: 90px;
           bottom: 270px;
           left: -15px;
@@ -266,8 +282,15 @@
           bottom: -54px;
           left: -35px;
         }
-        @include bp(desktop){
-          width: 96px;
+        @include bp(tablet) {
+          width: 80px;
+          height: 90px;
+          position: absolute;
+          bottom: 94px;
+          left: -35px;
+        }
+        @include bp(navigation){
+   
           height: 100px;
           bottom: 4px;
           left: -35px;
@@ -337,7 +360,7 @@
 #my-work-container {
   background:  linear-gradient(#64b9ee, #015d9b,#1a3566 96.71%);
   width: 100%;
-  min-height: 425px;
+  min-height: 435px;
   display: flex;
   flex-direction: column;
   justify-content: center;

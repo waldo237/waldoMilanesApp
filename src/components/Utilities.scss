@@ -1,9 +1,13 @@
 @mixin bp($point) {
-    @if $point == desktop {
+  @if $point == navigation {
+    @media (min-width: 819px) { @content; }
+  }
+    @else if $point == desktop {
       @media (min-width: 800px) { @content; }
     }
-    @else if $point == navigation {
-      @media (min-width: 819px) { @content; }
+    
+    @else if $point == laptop {
+      @media (min-width: 700px) { @content; }
     }
     @else if $point == tablet {
       @media (min-width: 640px) { @content; }
