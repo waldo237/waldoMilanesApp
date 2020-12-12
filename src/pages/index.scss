@@ -25,19 +25,20 @@
   }
 }
 .hero-area-wrapper {
-  min-height: 600px; /*check if needed if not remove from media*/
+  min-height: 850px; /*check if needed if not remove from media*/
   width: 92%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 3% 0px 4%;
+  padding: 0px 4% 0px 4%;
   margin-top: 8px;
+  overflow: hidden;
   @include bp(desktop) {
-    min-height: 420px;
+    min-height: 450px;
     align-items: stretch;
     justify-content: space-between;
     flex-direction: row;
-    // width: 96%;
+    width: 96%;
     padding: 0px 2% 0px 2%;
     margin-top: 0px;
   }
@@ -46,12 +47,15 @@
     height:0;
     @include bp(desktop){
       width: 68%;
-      height:550px;
+      height:500px;
       max-width: 1040px;
       background-color: var(--primary-color);
       clip-path: circle(55.5% at 61% 16%);
       position: absolute;
       right: 0px;
+    }
+    @include bp(wideScreen){
+      height:550px;
     }
   }
   #hero-title-wrapper {
@@ -75,25 +79,32 @@
         }
       }
       #web-developer {
-        margin: 0px;
+        margin: 5px;
         font-size: 11vw;
         @include bp(desktop) {
           align-self: flex-start;
           font-size: 3.5rem;
         }
+        @include bp(wideScreen){
+          font-size: 4rem;
+        }
       }
       #introduction-paragraph{
-        margin: 22px 0px;
+        margin: 30px auto;
         line-height: 1.5;
         text-align: start;
         font-size: 1em;
         @include bp(desktop){
           font-size: 1.1em;
         }
+        @include bp(wideScreen){
+          font-size: 1.4em;
+        }
       }
       #hear-more-btn{
         @extend .home-btn;
         margin:0px;
+        margin-bottom: 15px;
         padding: 10px 0px;
         z-index: 99;
         width: 100%;
@@ -104,19 +115,17 @@
   }
    /* SHAPES */
   .main-shape-wrapper{
-      padding-top: 40px;
+      padding-top: 100px;
       display: flex;
       align-content: center;
       justify-content: center;
       width: 100%;
-      @include bp(laptop){
+
+      @include bp(desktop) {
         padding-top: 0px;
-          width: 60%;
+          width: 50%;
         }
-      @include bp(navigation) {
-        padding-top: 0px;
-          width: 40%;
-        }
+
     .shapes{
       --shape-width: 30%;
       position: relative;
@@ -135,15 +144,11 @@
           left: calc(var(--shape-width) - 105px);
           bottom: 128px;
         }
-        @include bp(laptop) {
-          width: 100px;
-          left: calc(var(--shape-width) - 100px);
-          top: 120px;
-        }
-        @include bp(navigation){
+    
+        @include bp(desktop){
           width: 130px;
-          left: calc(var(--shape-width) - 105px);
-          bottom: 128px;
+          left: calc(var(--shape-width) - 110px);
+          bottom: 140px;
         }
       }
       .code-shape{
@@ -157,7 +162,7 @@
           top:268px;
           left: 5px; 
         }
-        @include bp(navigation){
+        @include bp(desktop){
           width: 140px;
           height: 134px;
           top:318px;
@@ -169,7 +174,7 @@
         position: relative;
         top: 40px;
         display: flex;
-        @include bp(navigation){
+        @include bp(desktop){
           top: 80px;
         }
           .wm-img {
@@ -197,7 +202,7 @@
               height: 130px;
               left: 10px;
             }
-            @include bp(navigation) {
+            @include bp(desktop) {
               background-size: 214px;
               width: 214px;
               height: 160px;
@@ -243,7 +248,7 @@
               @include bp(tablet) {
                 width: 270px;
               }
-              @include bp(navigation){
+              @include bp(desktop){
                 width: 350px;
              }
           }
@@ -257,13 +262,8 @@
         position: relative;
         animation: bounce 4s 4s   infinite;
         @include bp(desktop){
-          width: 70px;
-        top: 15px;
-        left: -20px;
-        }
-        @include bp(navigation){
           width: 90px;
-          bottom: 270px;
+          bottom: 290px;
           left: -15px;
           position: absolute;
         }
@@ -282,18 +282,11 @@
           bottom: -54px;
           left: -35px;
         }
-        @include bp(tablet) {
-          width: 80px;
-          height: 90px;
-          position: absolute;
-          bottom: 94px;
-          left: -35px;
-        }
-        @include bp(navigation){
+        @include bp(desktop){
    
           height: 100px;
           bottom: 4px;
-          left: -35px;
+          left: -45px;
           position: absolute;
         }
       }
@@ -308,7 +301,7 @@
   @include bp(desktop){
     font-size: 1.1em;
     width: 90%;
-    padding: 140px 5% 100px 5%;
+    padding: 200px 5% 120px 5%;
   }
   #more-about-me-wrapper{
     display: flex;
@@ -320,7 +313,7 @@
     .more-about-me-card{
       padding: 4%;
       margin: 60px 0px;
-      height: 240px;
+      height: 340px;
       width: 80%;
       display: flex;
       flex-direction: column;
@@ -335,6 +328,7 @@
       }
       @include bp(desktop){
         width:28%;
+        height: 250px;
        
       }
     }
@@ -344,10 +338,10 @@
       &::after{
         content: "";
         background: var(--primary-color);
-        width: 110px;
-        height: 110px;
+        width: 140px;
+        height: 140px;
         bottom: 5px;
-        right: -15px;
+        right: -30px;
         border-radius: 50%;
         z-index: -1;
         position: absolute;
@@ -366,6 +360,9 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  @include bp(desktop){
+    min-height: 535px;
+  }
   .my-work-btn {
     @extend .home-btn;
     @include bp(desktop){

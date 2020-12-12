@@ -4,7 +4,7 @@ import './DefaultShareModal.scss'
 
  const   DefaultShareModal=({infoToShare}) =>{
    const currentURL = 'https://waldomilanes.com';
-
+  const information = {...infoToShare, url: infoToShare.composeUrlWithId ? `${infoToShare.url}/?${infoToShare.hash}`: `${infoToShare.url}`}
   function copyLinkToClipboard() {
     const copyText = document.getElementById("pen-url");
     copyText.select();
@@ -31,14 +31,14 @@ import './DefaultShareModal.scss'
             <button type='button' className="close-button"><svg><use href="#close" /></svg></button>
           </header>
           <div className="targets">
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentURL}${infoToShare.url}#${infoToShare.hash}`} target='_blank' rel="noreferrer" className="button">
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${currentURL}${information.url}`} target='_blank' rel="noreferrer" className="button">
               <svg>
                 <use href="#facebook" />
               </svg>
               <span>Facebook</span>
             </a>
     
-            <a href={`https://twitter.com/share?text=${infoToShare.title}&url=${currentURL}${infoToShare.url}`} target='_blank' rel="noreferrer" className="button">
+            <a href={`https://twitter.com/share?text=${information.title}&url=${currentURL}${information.url}`} target='_blank' rel="noreferrer" className="button">
               <svg>
                 <use href="#twitter" />
               </svg>
@@ -46,7 +46,7 @@ import './DefaultShareModal.scss'
             </a>
     
             <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentURL}${infoToShare.url}`} 
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentURL}${information.url}`} 
               target='_blank'
               rel="noreferrer"
               className="button"
@@ -58,7 +58,7 @@ import './DefaultShareModal.scss'
             </a>
     
             <a
-              href={`mailto:?subject=${infoToShare.title}&body=${infoToShare.description.slice(0,200)}...%0D%0A%0D%0A Find it at ${currentURL}${infoToShare.url}.`} 
+              href={`mailto:?subject=${information.title}&body=${information.description.slice(0,200)}...%0D%0A%0D%0A Find it at ${currentURL}${information.url}`} 
               target='_blank'
               rel="noreferrer"
               className="button"
@@ -70,7 +70,7 @@ import './DefaultShareModal.scss'
             </a>
           </div>
           <div className="link">
-            <input type="text" id='pen-url' className="pen-url" value={`${currentURL}${infoToShare.url}`} />
+            <input type="text" id='pen-url' className="pen-url" value={`${currentURL}${information.url}`} />
             <button type='button' className="copy-link" onClick={copyLinkToClipboard}>Copy Link</button>
           </div>
         </div>
@@ -101,7 +101,7 @@ DefaultShareModal.propTypes = {
       description: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
       hash: PropTypes.string.isRequired,
-
+      composeUrlWithId: PropTypes.bool
       }
       ).isRequired,
 }

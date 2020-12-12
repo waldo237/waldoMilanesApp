@@ -140,7 +140,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
         </div>
       </div>
 
-      <DefaultShareModal infoToShare={infoToShare} />
+      <DefaultShareModal infoToShare={infoToShare} composeUrlWithId />
       <div className='comment-box-comment'>
         {(fallback)
           ? <SignInFallback />
@@ -232,12 +232,13 @@ CommentBox.propTypes = {
     { 
       title: PropTypes.string.isRequired,
        description: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired 
+        url: PropTypes.string.isRequired, 
+        composeUrlWithId: PropTypes.bool
       }
       ).isRequired,
   itemId: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
-
 }
+
 
 export default CommentBox; 

@@ -120,7 +120,7 @@ const Navigation = () => {
   }, [])
 
   return (
-    <nav id="navbar" className="primary shadow stuck">
+    <nav id="navbar" className="primary stuck">
       <Link to="/" className="social-link link">
         <img
           src={bannerImg}
