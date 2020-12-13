@@ -64,14 +64,16 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
   };
 
   
-  await fetchProject().then(({ projects }) => {
+  await fetchProject().then(async({ projects }) => {
+    await Promise.all(
     projects.map(async(project) => {
       const fluidImages = await generateImages(project);
-        createPage({
+      await  createPage({
           path: `project/${project.technology}`,
           component: slash(projectViewer),
           context: { ...project, screenshotImage: fluidImages },
         });
-      });
-  })
+      })
+      )
+    })
 };
