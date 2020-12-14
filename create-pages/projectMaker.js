@@ -62,7 +62,7 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
         return { projects };
       });
   };
-
+ 
   
   await fetchProject().then(async({ projects }) => {
     await Promise.all(
