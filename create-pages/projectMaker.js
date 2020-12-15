@@ -60,7 +60,7 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
       .then(({ data }) => {
         const { HWGraphQL: { projects } } = data;
         return { projects };
-      });
+      }); 
   };
  
   
