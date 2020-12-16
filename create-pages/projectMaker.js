@@ -54,7 +54,7 @@ module.exports = async ({  graphql, getCache, createNodeId, cache, reporter, cre
     return generatedImage;
   };
 
-  const fetchProject = async () => {
+  const fetchProject = async () => { 
     // eslint-disable-next-line no-return-await
     return await graphql(GET_PROJECTS)
       .then(({ data }) => {
