@@ -17,7 +17,7 @@ const Home = () => {
     <>
       <SEO 
         title="My professional profile | Web Developer" 
-        description="I know how to efficiently create elegant and user-friendly interfaces and setup back-end databases that serve different business needs. My experience in educational management has given me the opportunity to help small teams foster cooperation for excellent results. I excel particularly at communicating my ideas respectfully and negotiating differences with my colleagues."
+        description="I know how to efficiently create elegant and user-friendly interfaces, customized back-end databases, and proper optimization to meet up-to-date security standards. My experience in educational management has given me the opportunity to help small teams foster cooperation for excellent results. I excel particularly at communicating my ideas respectfully and negotiating differences with my colleagues."
       />
       <main className="hero-area-wrapper light">
         <div className='elipsis-shape' />
@@ -35,8 +35,8 @@ const Home = () => {
           <Tecnologies />
 
           <div className='fish-animation'>
-            <FishFlock  />
-            <FishFlock2 />
+            {/* <FishFlock  />
+            <FishFlock2 /> */}
           </div>
         </div>
       </article>

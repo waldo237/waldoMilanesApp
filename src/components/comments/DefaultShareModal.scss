@@ -1,5 +1,6 @@
 @import '../Utilities.scss';
 .share-modal-wrapper{
+  
     .hidden {
         display: none;
     }
@@ -48,9 +49,10 @@
     
     .share-button, .share-dialog {
         position: absolute;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        top: 50%; 
+        margin-left: -200px;
+        // margin-top: -100px;
     }
     
     .share-dialog {

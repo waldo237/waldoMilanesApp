@@ -10,17 +10,17 @@ const MoreAboutMe = () => {
     {
       id: uuidv4(),
       icon: <Ability />,
-      title: <Trans i18nKey='home.technicalTitle'>technical skills</Trans>, content: <Trans i18nKey='home.technicalContent'>I know how to efficiently create elegant and user-friendly interfaces and setup back-end databases that serve different business needs.</Trans>
+      title: <Trans i18nKey='home.technicalTitle'>technical skills</Trans>, content: <Trans i18nKey='home.technicalContent'>I know how to efficiently create customized back-end databases, elegant and user-friendly interfaces, and proper optimization to meet up-to-date security standards.</Trans>
     },
     {
       id: uuidv4(),
       icon: <Management />,
-      title: <Trans i18nKey='home.managerialTitle'>managerial skills</Trans>, content: <Trans i18nKey='home.managerialContent'>My experience in educational management has given me the opportunity to help small teams foster cooperation for excellent results.</Trans>
+      title: <Trans i18nKey='home.managerialTitle'>managerial skills</Trans>, content: <Trans i18nKey='home.managerialContent'>I have experience helping small teams foster cooperation and motivation to deliver accurate results in record time.</Trans>
     },
     {
       id: uuidv4(),
       icon: <Communication />,
-      title: <Trans i18nKey='home.attitudelTitle'>professional attitude</Trans>, content: <Trans i18nKey='home.attitudeContent'>I excel particularly at communicating my ideas respectfully and negotiating differences with my colleagues.</Trans>
+      title: <Trans i18nKey='home.attitudelTitle'>professional attitude</Trans>, content: <Trans i18nKey='home.attitudeContent'>I excel at communicating my ideas respectfully and negotiating differences with my colleagues.</Trans>
     },
   ]
   useEffect(() => {

@@ -123,7 +123,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
             <small>{rating.length ? rating.filter((rate) => rate === "dislike").length : 0}</small>
             {" "}
           </span>
-          {/* <Trans i18nKey='commentBox.impression'>Impression</Trans> */}
+  
         </p>
         <p> <small>{comments.length}</small>  <FontAwesomeIcon
           className="fa-lg"
@@ -147,9 +147,9 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
           : (
             <div className='comment-box-comment'>
               <div className="form-group">
-                <label className="input" htmlFor="comment-input"> <Trans i18nKey='commentBox.write'>Write a comment</Trans>
+                <label className="input" htmlFor={`comment-input-${itemId}`}> <Trans i18nKey='commentBox.write'>Write a comment</Trans>
                   <input
-                    id="comment-input"
+                    id={`comment-input-${itemId}`}
                     name="comment"
                     type="text"
                     className="form-control"

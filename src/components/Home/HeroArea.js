@@ -13,7 +13,7 @@ const HeroArea = () => {
         <h1 id="web-developer"><Trans t={t} i18nKey="home.developer">Web Developer</Trans></h1>
         <p id='introduction-paragraph'>
           <Trans t={t} i18nKey="home.introductionParagraph">
-            Hi, my name is Waldo Milanes. I am an enthusiastic and skilled professional with substantial technical expertise in designing and developing web applications.
+            Hi, my name is Waldo Milanes. I am an enthusiastic and skilled computer programmer with knowledge and experience in building efficient web applications.
           </Trans>
 
         </p>

@@ -2,7 +2,7 @@
 const fs = require('fs');
 const createAllProjects = require( './create-pages/projectMaker' );
 
-
+ 
 exports.createPages = async ({ actions, graphql, getCache, createNodeId, cache, reporter }) => {
   const { createPage, createNode } = actions; 
   await createAllProjects( { graphql, getCache, createNodeId, cache, reporter, createPage, createNode } );

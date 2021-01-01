@@ -70,12 +70,12 @@ const Articles = () => {
           </div>
         </header>
 
+
         <Filter
           items={articles}
           itemType={<Trans i18nKey='articles.article'>article</Trans>} 
           setDisplayableArray={setDisplayableArray}
         />
-
         {displayableArr.length
         ?displayableArr.map((item) => (
           <article
@@ -114,7 +114,7 @@ const Articles = () => {
           </article>
         ))
         : (
-          <article className="all-projects">
+          <article className="article-card">
             <Loading message="Loading the items! ...If it's taking too long, you should probably come back later" />
           </article>
         )}

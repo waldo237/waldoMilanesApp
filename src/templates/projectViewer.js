@@ -10,17 +10,17 @@ import {
 import { isEmpty } from 'lodash';
 import IconizeFile from "../components/ProjectViewer/IconizeFile";
 import Loading from "../components/Loading/Loading";
-// import envURL from '../envURL';
 import ScreenshotViewer from "../components/ProjectViewer/ScreenshotViewer";
 import CommentBox from "../components/comments/CommentBox";
 import { Context } from '../store/store'
 import SEO from "../components/seo";
 import Directory from "../components/ProjectViewer/Directory";
 import File from "../components/ProjectViewer/File";
-import envURL from "../envURL";
+import { centerModal } from "../components/gobalUtil";
 
 const ProjectViewer = ({ pageContext }) => {
-  if (isEmpty(pageContext)) {
+ const pageContextArr = Object.values(pageContext);
+  if (isEmpty(pageContextArr)) {
     return null;
   }
 
@@ -28,7 +28,7 @@ const ProjectViewer = ({ pageContext }) => {
   const technologySwicher = () => {
     let tempTechnology = null;
 
-    switch (pageContext.technology) {
+    switch (pageContextArr[0].technology) {
       case "node":
         tempTechnology = { title: "NodeJs", extension: "node" };
         break;
@@ -52,7 +52,7 @@ const ProjectViewer = ({ pageContext }) => {
   const { Trans } = state;
 
 
-  const projectArray = pageContext ? [pageContext] : []
+  const projectArray = pageContextArr;
   const showModal = (value) => {
     if (typeof window !== `undefined`) {
       const internalFiles = document.querySelectorAll(".modal");
@@ -82,6 +82,12 @@ const ProjectViewer = ({ pageContext }) => {
     }
   };
 
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      const modal = document.querySelector('.modal');
+      if(modal) centerModal(modal);
+    }
+  })
   return (
     <>
       { (technology)
@@ -177,7 +183,7 @@ const ProjectViewer = ({ pageContext }) => {
                         </>
                       </div>
                       <CommentBox
-                        infoToShare={{ title: project.title, description: project.description, url: `/project/${ pageContext.technology }`, hash:`${project._id}` }} 
+                        infoToShare={{ title: project.title, description: project.description, url: `/project/${ project.technology }`, hash:`${project._id}` }} 
                         itemId={project._id}
                         pathname="/project"
                         updated
@@ -205,5 +211,3 @@ ProjectViewer.propTypes = {
 }
 
 export default ProjectViewer;
-
-
