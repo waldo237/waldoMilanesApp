@@ -17,7 +17,7 @@ const Home = () => {
     <>
       <SEO 
         title="Waldo Milanes's blog | Web portfolio | Tutorials about Web Development" 
-        description="I am Waldo Milanes: an enthusiastic and skilled computer programmer with knowledge and experience in building efficient web applications. Since software development is my passion, I spend time exploring new technologies and sharing my experience, strategies, and any possible hurdles I face."
+        description="I am Waldo Milanes: an enthusiastic and skilled computer programmer with knowledge and experience in building efficient web applications. Since software development is my passion, I spend time exploring new technologies and sharing my experience, strategies, and any possible hurdle I face."
       />
       <main className="hero-area-wrapper light">
         <div className='elipsis-shape' />

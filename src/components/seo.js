@@ -12,27 +12,30 @@ const SEO = ({ title, description, image, article }) => {
     title: defaultTitle,
     titleTemplate,
     description: defaultDescription,
-    siteUrl,
     image: defaultImage,
     author,
     twitterUsername,
     url,
   } = site.siteMetadata
-
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || defaultImage}`,
-    url: `${siteUrl}${pathname}`,
+    image: `${url}${image || defaultImage}`,
+    url: `${url}${pathname}`,
     author,  
     canonical: pathname ? `${url}${pathname}` : null
-
+    
   }
+
 
   return (
     <Helmet
       title={seo.title}
+      
       titleTemplate={titleTemplate}
+      htmlAttributes={{
+        lang: 'en',
+      }}
       link={
         seo.canonical
           ? [
@@ -44,29 +47,30 @@ const SEO = ({ title, description, image, article }) => {
           : []
       }
       meta={[
+        { name: `charSet`, content:` utf-8`, },
         { name: `description`, content: description, },
         { property: `og:title`, content: title, },
         { property: `og:description`, content: description, },
         { property: `og:type`, content: `website`, },
-        { property: `og:image`, content: image, },
+        { property: `og:image`, content: seo.image, },
         { name: `twitter:title`, content: title },
         { property: `twitter:creator`, content: twitterUsername }
         
 
       ].concat(
-        image
+        seo.image
           ? [
             {
               property: "og:image",
-              content: image,
+              content: seo.image,
             },
             {
               property: "og:image:width",
-              content: image.width,
+              content: seo.image.width,
             },
             {
               property: "og:image:height",
-              content: image.height,
+              content: seo.image.height,
             },
             {
               name: "twitter:card",

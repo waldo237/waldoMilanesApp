@@ -151,9 +151,9 @@ const Education = () => {
         {educationPoints.map((item) => (
           <div key={item.id} className="education-card lazy-effect">
             <div className='education-date-and-place'>
-              <h3>
+              <h2>
                 {item.duration}
-              </h3>
+              </h2>
               <h3>
                 {item.place}
               </h3>

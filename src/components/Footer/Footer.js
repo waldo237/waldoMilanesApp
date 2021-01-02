@@ -23,6 +23,7 @@ const Footer = () => {
          href='https://twitter.com/WaldoMilanes'
          target="_blank"
          className="link hoverable-card social-link"
+         alt='The icon of Twitter'
        >
          <FontAwesomeIcon className="fa-2x social" icon={faTwitter} />
 
@@ -32,6 +33,7 @@ const Footer = () => {
          href='https://www.linkedin.com/in/waldomilanes/'
          target="_blank"
          className="link hoverable-card social-link"
+         alt="The icon of LinkedIn. Find Waldo Milanes on LinkedIn"
        >
          <FontAwesomeIcon className="fa-2x social" icon={faLinkedin} />
        </a>
@@ -40,6 +42,7 @@ const Footer = () => {
          href='https://www.facebook.com/milanes237/'
          target="_blank"
          className="link hoverable-card social-link"
+         alt="The icon of Facebook. Find Waldo Milanes on Facebook"
        >
          <FontAwesomeIcon className="fa-2x social" icon={faFacebookSquare} />
        </a>
@@ -48,6 +51,7 @@ const Footer = () => {
          href='https://www.instagram.com/waldo237/?hl=en'
          target="_blank"
          className="link hoverable-card social-link"
+         alt="The icon of Instagram. Find Waldo Milanes on Instagram"
        >
          <FontAwesomeIcon className="fa-2x social" icon={faInstagram} />
        </a>
@@ -56,6 +60,7 @@ const Footer = () => {
          href='https://github.com/waldo237'
          target="_blank"
          className="link hoverable-card social-link"
+         alt="The icon of Github. Find Waldo Milanes on Github"
        >
          <FontAwesomeIcon className="fa-2x social" icon={faGithub} />
        </a>
