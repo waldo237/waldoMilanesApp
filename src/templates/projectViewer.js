@@ -93,7 +93,7 @@ const ProjectViewer = ({ pageContext }) => {
           <main className="project-viewer-container light">
             <SEO
               title={`Work I have done with ${technology.title}`}
-              description="Some code samples of working projects that demonstrate the coding skills I have gained over the years. Feel free to take a look at my code."
+              description="Some code samples of working projects that demonstrate the coding skills I have gained over the years. Feel free to take a look at these projects, and use them if they help you somehow."
             />
             <header className="project-viewer-title">
               <div className='page-default-title-icon'>

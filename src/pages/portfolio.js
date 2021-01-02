@@ -63,8 +63,11 @@ const Portfolio = () => {
   return (
     <>
       <SEO 
-        title="Technologies I am proficient at. ReactJs | VueJS | NodeJs | Java | JavaScript" 
-        description="Desktop Apps and RESTful APIs I have done with Java. User Interfaces I have built with ReactJS. Web Apps I have built with VueJS. Servers and RESTful APIs I have done with NodeJS"
+        title="ReactJs | VueJS | NodeJs | Java | JavaScript" 
+        description=" Desktop Apps and RESTful APIs done with Java. Examples of Single Page Apps,
+        Progressive Web Apps,
+        Server-side Rendered apps,
+        Static Web Applications, User Interfaces built with ReactJS. Web Apps with VueJS. Servers and RESTful APIs I have done with NodeJS"
       />
       <main className="portfolio-container light fadeInUpx"> 
         <header className="porfolio-title primary--text ">

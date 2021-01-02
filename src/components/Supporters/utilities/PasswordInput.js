@@ -29,6 +29,7 @@ const PasswordInput = ({inputHandler, strength, id, reEnter})=>{
             icon={temperature(strength).icon}
           />
           <input
+            autoComplete="true"
             id={`supporter-password${id}`}
             name={(reEnter)?"reEntered":"password"}
             type={(eyeState)?"text":"password"}

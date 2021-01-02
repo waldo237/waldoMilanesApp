@@ -5,17 +5,18 @@ import { useLocation } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
 
 const SEO = ({ title, description, image, article }) => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const { site } = useStaticQuery(query)
 
   const {
-    defaultTitle,
+    title: defaultTitle,
     titleTemplate,
-    defaultDescription,
+    description: defaultDescription,
     siteUrl,
-    defaultImage,
+    image: defaultImage,
     author,
     twitterUsername,
+    url,
   } = site.siteMetadata
 
   const seo = {
@@ -23,11 +24,62 @@ const SEO = ({ title, description, image, article }) => {
     description: description || defaultDescription,
     image: `${siteUrl}${image || defaultImage}`,
     url: `${siteUrl}${pathname}`,
-    author,
+    author,  
+    canonical: pathname ? `${url}${pathname}` : null
+
   }
 
   return (
-    <Helmet title={seo.title} titleTemplate={titleTemplate}>
+    <Helmet
+      title={seo.title}
+      titleTemplate={titleTemplate}
+      link={
+        seo.canonical
+          ? [
+              {
+                rel: "canonical",
+                href: seo.canonical,
+              },
+            ]
+          : []
+      }
+      meta={[
+        { name: `description`, content: description, },
+        { property: `og:title`, content: title, },
+        { property: `og:description`, content: description, },
+        { property: `og:type`, content: `website`, },
+        { property: `og:image`, content: image, },
+        { name: `twitter:title`, content: title },
+        { property: `twitter:creator`, content: twitterUsername }
+        
+
+      ].concat(
+        image
+          ? [
+            {
+              property: "og:image",
+              content: image,
+            },
+            {
+              property: "og:image:width",
+              content: image.width,
+            },
+            {
+              property: "og:image:height",
+              content: image.height,
+            },
+            {
+              name: "twitter:card",
+              content: "summary_large_image",
+            },
+          ]
+          : [
+            {
+              name: "twitter:card",
+              content: "summary",
+            },
+          ])}
+    >
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
@@ -81,13 +133,13 @@ const query = graphql`
   query SEO {
     site {
       siteMetadata {
-        defaultTitle: title
-        titleTemplate
-        defaultDescription: description
-        siteUrl: url
-        defaultImage: image
         author
+        description
+        image
+        title
+        titleTemplate
         twitterUsername
+        url
       }
     }
   }

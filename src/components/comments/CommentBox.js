@@ -15,7 +15,7 @@ import SaveChangesBtn from './SaveChangesBtn';
 import DefaultShareModal from './DefaultShareModal';
 
 
-const CommentBox = ({  itemId, pathname,  infoToShare }) => {
+const CommentBox = ({ itemId, pathname, infoToShare }) => {
   // state and variables
   const [state] = useContext(Context);
   const { Trans } = state;
@@ -30,6 +30,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
   const [rating, setRating] = useState([]);
   const [displayableErrors, setErrors] = useState([]);
   const [editingMode, setEditingMode] = useState(false);
+  const [mounted, setMounted] = useState(true);
   const [response, setResponse] = useState(null);
   const [requestStarted, setRequest] = useState(false);
   const [selectedComment, setSelectedComment] = useState(null);
@@ -90,10 +91,12 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
 
   /* effects */
   useEffect(() => {
-    const ac = new AbortController();
-    getComments(options);
-    getRating(options);
-    return () => ac.abort();
+    if(mounted){
+      getComments({...options, mounted});
+      getRating({...options, mounted});
+
+  } 
+    return () =>  setMounted(false);
   }, [updated])
 
 
@@ -124,7 +127,7 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
             <small>{rating.length ? rating.filter((rate) => rate === "dislike").length : 0}</small>
             {" "}
           </span>
-  
+
         </p>
         <p> <small>{comments.length}</small>  <FontAwesomeIcon
           className="fa-lg"
@@ -223,20 +226,20 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
           ))
           : null
       }
-     
+
     </>
   )
 }
 CommentBox.propTypes = {
 
   infoToShare: PropTypes.shape(
-    { 
+    {
       title: PropTypes.string.isRequired,
-       description: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired, 
-        composeUrlWithId: PropTypes.bool
-      }
-      ).isRequired,
+      description: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      composeUrlWithId: PropTypes.bool
+    }
+  ).isRequired,
   itemId: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
 }

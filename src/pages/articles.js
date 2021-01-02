@@ -48,8 +48,9 @@ const Articles = () => {
   return (
     <>
       <SEO 
-        title="My articles and posts" 
-        description="I love sharing my experience and ideas through writing. Don't miss my posts about programming."
+        title="Articles and posts written by Waldo Milanes" 
+        description="In these articles, you will find interesting ideas about web development: JavaScript, NodeJS, VueJS, HTML, CSS, SASS, Career advice, software Development and more."
+      
       />
       <main className="articles-container light">
         <header className="articles-title">

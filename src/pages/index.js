@@ -16,8 +16,8 @@ const Home = () => {
   return (
     <>
       <SEO 
-        title="My professional profile | Web Developer" 
-        description="I know how to efficiently create elegant and user-friendly interfaces, customized back-end databases, and proper optimization to meet up-to-date security standards. My experience in educational management has given me the opportunity to help small teams foster cooperation for excellent results. I excel particularly at communicating my ideas respectfully and negotiating differences with my colleagues."
+        title="Waldo Milanes's blog | Web portfolio | Tutorials about Web Development" 
+        description="I am Waldo Milanes: an enthusiastic and skilled computer programmer with knowledge and experience in building efficient web applications. Since software development is my passion, I spend time exploring new technologies and sharing my experience, strategies, and any possible hurdles I face."
       />
       <main className="hero-area-wrapper light">
         <div className='elipsis-shape' />

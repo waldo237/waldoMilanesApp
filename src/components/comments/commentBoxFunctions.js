@@ -43,9 +43,10 @@ const shareLink = async (options) => {
  * @param {*} itemId :string the uid of the item subject to the comment.
  * @param {*} setErrors :function useState(errors:array)
  * @param {*} pathname:string -- a URI
+ * @param {boolean} mounted helps determine if the comment component is still mounted.
  */
 const getComments = (options) => {
-  const { itemId, setErrors, pathname, setComments } = options;
+  const { itemId, setErrors, pathname, setComments, mounted } = options;
 
   fetch(`${envURL}${pathname}/comment/${itemId}`, {
     method: "GET",
@@ -54,8 +55,10 @@ const getComments = (options) => {
     }
   })
     .then((res) => res.json())
-    .then(setComments)
-    .catch(console.error);
+    .then((data)=>{
+     if(mounted) setComments(data)
+    })
+    .catch((err) => setErrors([err]));
 }
 /**
  * @function getRating get the getRating by calling the API.
@@ -63,9 +66,10 @@ const getComments = (options) => {
  * @param {*} itemId :string the uid of the item subject to the comment.
  * @param {*} setErrors :function useState(errors:array)
  * @param {*} pathname:string -- a URI
+ * @param {boolean} mounted helps determine if the comment component is still mounted.
  */
 const getRating = (options) => {
-  const { itemId, setErrors, pathname, setRating } = options;
+  const { itemId, setErrors, pathname, setRating, mounted } = options;
   fetch(`${envURL}${pathname}/rating/${itemId}`, {
     method: "GET",
     headers: {
@@ -73,8 +77,10 @@ const getRating = (options) => {
     }
   })
     .then((res) => res.json())
-    .then(setRating)
-    .catch(console.error);
+    .then((data)=>{
+      if(mounted) setRating(data)
+     })
+     .catch((err) => setErrors([err]));
 }
 
 

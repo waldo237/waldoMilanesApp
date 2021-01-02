@@ -83,7 +83,7 @@ const Profile = (match) => {
   }
   return (
     <>
-      <SEO title="User profile" description="a route where the followers of my work can edit their profiles."  />
+      <SEO title="User profile" description="Edit your profile at https://waldomilanes.com/"  />
       <PrivateRoute>
 
         <main className={(response || displayableErrors) ? 'profile-container response-message fadeInUpx' : 'profile-container fadeInUpx'}>

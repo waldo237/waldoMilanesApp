@@ -23,8 +23,8 @@ const Followers = ({location}) => {
   return (
     <>
       <SEO 
-        title="Become a Follower | fan | Supporter" 
-        description="If you like what I do, you can register to access all my content and receive notifications when I publish new material."
+        title="Become one of follower | fan | Supporter" 
+        description="If you like what I do; my writing, tutorials, opinions, and projects, you can register to https://waldomilanes.com/followers to be able to access all my content and receive notifications when I publish new material."
       />
       <div className="followers-container fadeInUpx light">
         <header className="followers-title">

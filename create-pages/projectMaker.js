@@ -78,11 +78,11 @@ module.exports = async ({ graphql, getCache, createNodeId, cache, reporter, crea
     const withImage =  await Promise.all(
    await projects.map(async (project) => {
         const fluidImages = await generateImages(project);
-        await createPage({
-          path: `project/${project.technology}/${project._id}`,
-          component: slash(projectViewer),
-          context: { ...project, screenshotImage: fluidImages },
-        });
+        // await createPage({
+        //   path: `project/${project.technology}/${project._id}`,
+        //   component: slash(projectViewer),
+        //   context: { ...project, screenshotImage: fluidImages },
+        // });
         set.add(project.technology);
         return { ...project, screenshotImage: fluidImages };
       })
@@ -100,26 +100,4 @@ module.exports = async ({ graphql, getCache, createNodeId, cache, reporter, crea
     })
   })
 
-  // const hashMap = {}
-  // await fetchProject()
-  //   .then(async ({ projects }) => {
-  //     projects.map(async (project) => {
-  //       if (!hashMap[project.technology]) hashMap[project.technology] = [];
-  //       const fluidImages = await generateImages(project);
-  //       hashMap[project.technology].push({ ...project, screenshotImage: fluidImages })
-  //     })
-  //   })
-  //   .then(() => {
-  //     for (const elem in hashMap) {
-  //       const keys = [];
-  //       if (hashMap.hasOwnProperty(elem)) {
-  //         keys.push(hashMap[elem]);
-  //       }
-  //       createPage({
-  //         path: `project/${elem}`,
-  //         component: slash(projectViewer),
-  //         context: keys,
-  //       });
-  //     }
-  //   })
 };

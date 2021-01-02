@@ -82,8 +82,8 @@ const Contacts = () => {
   return (
     <main className="contact-container fadeInUpx light">
       <SEO
-        title="Let's get in contact."
-        description="If you like what I do and would like to use my services, don't hesitate to contact me."
+        title="Contact Waldo Milanes"
+        description="If you are interested in developing a site for your personal brand or business, you can rely on my services as a web developer, don't hesitate to contact me."
       />
       <header className="contact-title">
         <div className='page-default-title-icon'>
