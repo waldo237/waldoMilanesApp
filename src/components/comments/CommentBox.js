@@ -90,9 +90,10 @@ const CommentBox = ({  itemId, pathname,  infoToShare }) => {
 
   /* effects */
   useEffect(() => {
+    const ac = new AbortController();
     getComments(options);
     getRating(options);
-
+    return () => ac.abort();
   }, [updated])
 
 

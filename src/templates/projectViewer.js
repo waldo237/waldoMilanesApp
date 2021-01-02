@@ -28,6 +28,7 @@ const ProjectViewer = ({ pageContext }) => {
   const technologySwicher = () => {
     let tempTechnology = null;
 
+
     switch (pageContextArr[0].technology) {
       case "node":
         tempTechnology = { title: "NodeJs", extension: "node" };
@@ -62,7 +63,7 @@ const ProjectViewer = ({ pageContext }) => {
           file.classList.toggle("modal-opened");
           centerModal(file);
           file.style.position = `fixed`;
-          file.style.top = `${window.pageYOffset + (file.offsetHeight / 2)}px`
+          file.style.top = `${window.pageYOffset  + (file.offsetHeight / 2)}px`
         }
       });
     }
@@ -96,7 +97,7 @@ const ProjectViewer = ({ pageContext }) => {
             />
             <header className="project-viewer-title">
               <div className='page-default-title-icon'>
-                <IconizeFile name={pageContext.technology} usingExtension />
+                <IconizeFile name={pageContext[0].technology} usingExtension />
 
               </div>
               <div>
