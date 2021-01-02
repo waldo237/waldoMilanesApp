@@ -144,8 +144,8 @@ color:  #f8d775 !important;
   position: absolute;
   left: 0;
   right:  0;
-  top:calc(50% - (450px / 2));
-  margin: 0 auto;
+  margin:auto;
+  margin-top: -300px;
   padding: 0px 10px;
   width: 90%;
   height: 450px;
@@ -154,6 +154,7 @@ color:  #f8d775 !important;
   transition: all 0.5s ease-out;
   @include bp(desktop){
     width: 80%;
+    margin-top: -250px;
   }
   .code {
     margin: 20px;

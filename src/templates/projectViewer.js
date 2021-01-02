@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./projectViewer.scss";
 import Proptypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -60,6 +60,9 @@ const ProjectViewer = ({ pageContext }) => {
         if (file.classList.contains(value)) {
           file.classList.toggle("modal-closed");
           file.classList.toggle("modal-opened");
+          centerModal(file);
+          file.style.position = `fixed`;
+          file.style.top = `${window.pageYOffset + (file.offsetHeight / 2)}px`
         }
       });
     }
@@ -82,12 +85,6 @@ const ProjectViewer = ({ pageContext }) => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== `undefined`) {
-      const modal = document.querySelector('.modal');
-      if(modal) centerModal(modal);
-    }
-  })
   return (
     <>
       { (technology)
