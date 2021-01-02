@@ -15,7 +15,7 @@ const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
       folderContainers.forEach((container) => {
         if (container.classList.contains(id)) {
           setOpen(true)
-         return resolve(id)
+          return resolve(id)
         }
       })
     })
@@ -43,7 +43,6 @@ const Directory = ({ folder, toggleClasses, showModal, insideAFolder }) => {
       </button>
 
       <FolderContent opened={opened} folder={folder} showModal={showModal} toggleClasses={toggleClasses} insideAFolder />
-
 
     </div>
   );

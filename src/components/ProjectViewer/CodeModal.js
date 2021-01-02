@@ -27,7 +27,7 @@ const CodeModal = ({
           style={style}
         >
           <span
-            className="close"
+            className="modal-close-btn"
             onClick={() => showModal(fileId)}
             onKeyDown={() => showModal(fileId)}
           >

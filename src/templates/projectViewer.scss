@@ -29,26 +29,19 @@
   .project-container {
     @extend .shadow;
     @extend .round-edges;
-    // @extend .flex-column;
     background: var(--light-card);
     color: var(--primary-color);
     padding: 20px 2%;
     max-width: 95%;
     margin: 30px auto;
-    // width: calc(95% - 60px); 
     @include bp(tablet){
       width: 80%;
     }
     @include bp(desktop){
       width: 50%;    
-      // min-width: 800px; 
       clear: both;   
    }
    .project-screenshot-container{
-      // @extend .flex-column;
-      // align-self: center;
-      // width: 90%;
-      // position: relative;
       padding: .6em 0px;
       @include bp(desktop){
         padding: 1em 0px;
@@ -56,7 +49,6 @@
       .project-screenshot {
         @extend .round-edges;
         @extend .shadow;
-        // align-self: center;
         width: 85%;
     
         position: relative;
@@ -149,16 +141,14 @@ color:  #f8d775 !important;
 .modal {
   @extend .round-edges;
   z-index: 100;
-
   position: absolute;
   left: 0;
   right:  0;
-  margin-top: 10%;
-  width: 90%;
-
-  margin: auto;
-  height: 450px;
+  top:calc(50% - (450px / 2));
+  margin: 0 auto;
   padding: 0px 10px;
+  width: 90%;
+  height: 450px;
   overflow: scroll; 
   word-wrap: unset;
   transition: all 0.5s ease-out;
@@ -168,8 +158,8 @@ color:  #f8d775 !important;
   .code {
     margin: 20px;
   }
-   span {
-    padding: 10px 1px 10px 1px;
+  .modal-close-btn {
+    padding: 10px;
     opacity: 0.9;
   }
 }
@@ -251,13 +241,12 @@ to {
   margin: 8px;
 }
 /* The Close Button */
-.close {
-  margin: 0px 10px;
+.modal-close-btn {
   position: sticky;
   top: -10px;
   left: calc(100% - 20px);
   float: right;
-  font-size: 28px;
+  font-size: 30px;
   &:hover,
   &:focus {
     color: var(--secondary-color);
