@@ -6,6 +6,8 @@ import CommentBox from '../components/comments/CommentBox';
 import { Context } from '../store/store';
 import SEO from '../components/seo';
 import {isEmpty} from 'lodash'
+import { faLanguage } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SingleArticle =({location})=>{
   const [state, dispatch] = useContext(Context);  
@@ -55,6 +57,7 @@ const SingleArticle =({location})=>{
                       dateStyle: "long",
                     })}
               </small>
+              <small className='single-article-date'> <FontAwesomeIcon icon={faLanguage} /> : {articleData.lang || 'ENGLISH'}</small> 
               <p className="single-article-text" dangerouslySetInnerHTML={{__html: articleData.body}} /> 
               <CommentBox 
                 infoToShare={{ title: articleData.title, description: articleData.body, url: `/singleArticle`, hash:`${articleData._id}`, composeUrlWithId:true }} 

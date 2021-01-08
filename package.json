@@ -44,6 +44,7 @@
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\"",
     "develop": "gatsby develop -H 0.0.0.0",
     "build": "gatsby clean && gatsby build && node ./copyLocalsToPublic.js && gatsby serve -H 0.0.0.0",
+    "publish": "gatsby clean && gatsby build && node ./copyLocalsToPublic.js && firebase deploy --only hosting",
     "serve": "gatsby serve",
     "start": "npm run develop"
   },

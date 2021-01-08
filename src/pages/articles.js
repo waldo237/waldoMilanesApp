@@ -8,7 +8,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./articles.scss";
 import { Link } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
+import { faFeatherAlt, faLanguage } from "@fortawesome/free-solid-svg-icons";
 import envURL from '../envURL';
 import Loading from "../components/Loading/Loading";
 import { Context } from "../store/store";
@@ -95,14 +95,16 @@ const Articles = () => {
               </picture>
             </div>
             <div>
-              <h1 className="articles-card-title primary--text">{item.title} </h1>
+              <h1 className="articles-card-title primary--text">{item.title}</h1>
+              
               <small>
                 <Trans i18nKey='articles.pubished'>Pubished on:</Trans>   {" "} 
                 {new Date(item.date).toLocaleString("eng-US", {
                       dateStyle: "long",
                     })}
               </small>
-              <p className="article-body"> {item.body} </p>
+              <p className="article-body" dangerouslySetInnerHTML={{__html:item.body}} /> 
+              <small> <FontAwesomeIcon icon={faLanguage} /> : {item.lang || 'ENGLISH'}</small> 
               <small className="read-more-wrapper">
                 <Link
                   to={`/singleArticle/?${item._id}`}
