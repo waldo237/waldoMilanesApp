@@ -95,7 +95,14 @@ const Articles = () => {
               </picture>
             </div>
             <div>
-              <h1 className="articles-card-title primary--text">{item.title}</h1>
+            
+              <h1 className="articles-card-title primary--text">  
+                <Link
+                  to={`/singleArticle/?${item._id}`}
+                  className="primary--text hover-underline-yellow"
+                >{item.title}
+                </Link>
+              </h1>
               
               <small>
                 <Trans i18nKey='articles.pubished'>Pubished on:</Trans>   {" "} 
@@ -103,7 +110,7 @@ const Articles = () => {
                       dateStyle: "long",
                     })}
               </small>
-              <p className="article-body" dangerouslySetInnerHTML={{__html:item.body}} /> 
+              <p className="article-body primary--text" dangerouslySetInnerHTML={{__html:item.body}} /> 
               <small> <FontAwesomeIcon icon={faLanguage} /> : {item.lang || 'ENGLISH'}</small> 
               <small className="read-more-wrapper">
                 <Link

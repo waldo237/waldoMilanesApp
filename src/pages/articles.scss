@@ -1,12 +1,16 @@
 @import '../components/Utilities.scss';
 
 .articles-container{
+  a {
+    text-decoration: none;
+  }
   width: 100%;
   display: grid;
   grid-template-columns: 2% 96% 2%;
   padding-bottom: 30px;
   .articles-title{
     margin-top: 10px;
+   
     @extend .page-default-title;
   }
 .filter{

@@ -57,8 +57,8 @@ const SingleArticle =({location})=>{
                       dateStyle: "long",
                     })}
               </small>
-              <small className='single-article-date'> <FontAwesomeIcon icon={faLanguage} /> : {articleData.lang || 'ENGLISH'}</small> 
-              <p className="single-article-text" dangerouslySetInnerHTML={{__html: articleData.body}} /> 
+              <small className='single-article-date '> <FontAwesomeIcon icon={faLanguage} /> : {articleData.lang || 'ENGLISH'}</small> 
+              <p className="single-article-text primary--text" dangerouslySetInnerHTML={{__html: articleData.body}} /> 
               <CommentBox 
                 infoToShare={{ title: articleData.title, description: articleData.body, url: `/singleArticle`, hash:`${articleData._id}`, composeUrlWithId:true }} 
                 itemId={articleData._id} 
