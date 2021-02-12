@@ -34,7 +34,7 @@ const getTokenFromLocalStorage = () => {
   if (typeof window !== `undefined`) {
     return (localStorage.getItem('auth_access_token'))
       ? localStorage.getItem('auth_access_token')
-      : sessionStorage.getItem('auth_access_token');
+      : sessionStorage.getItem('auth_access_token'); 
   }
 }
 /**
