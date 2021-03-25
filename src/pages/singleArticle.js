@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Proptypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {isEmpty} from 'lodash'
+import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 import envURL from '../envURL';
 import './singleArticle.scss'
 import CommentBox from '../components/comments/CommentBox';
 import { Context } from '../store/store';
 import SEO from '../components/seo';
-import {isEmpty} from 'lodash'
-import { faLanguage } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SingleArticle =({location})=>{
   const [state, dispatch] = useContext(Context);  

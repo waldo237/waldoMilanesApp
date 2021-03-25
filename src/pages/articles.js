@@ -110,7 +110,8 @@ const Articles = () => {
                       dateStyle: "long",
                     })}
               </small>
-              <p className="article-body primary--text" dangerouslySetInnerHTML={{__html:item.body}} /> 
+              <p className="article-body primary--text text-preview" dangerouslySetInnerHTML={{__html:item.body}} /> 
+              
               <small> <FontAwesomeIcon icon={faLanguage} /> : {item.lang || 'ENGLISH'}</small> 
               <small className="read-more-wrapper">
                 <Link

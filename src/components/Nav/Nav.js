@@ -29,9 +29,9 @@ const Navigation = () => {
       link: "/portfolio",
       children: [
         { id: uuidv4(), title: "Node", link: "/project/node", icon: faNodeJs },
+        { id: uuidv4(), title: "React", link: "/project/react", icon: faReact },
         { id: uuidv4(), title: "Java", link: "/project/java", icon: faJava },
         { id: uuidv4(), title: "Vue", link: "/project/vue", icon: faVuejs },
-        { id: uuidv4(), title: "React", link: "/project/react", icon: faReact },
       ],
     },
     { id: uuidv4(), title: <Trans i18nKey="nav.articles">Articles</Trans>, link: "/articles" },

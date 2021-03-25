@@ -152,10 +152,10 @@
     "or": "Or",
     "emailA": "Dirección de correo electrónico",
     "remember": "Recuérdame",
-    "forgot": "Olvidó",
+    "forgot": "Olvidó la",
     "password": "Contraseña?",
     "rePasswordInput": "volver a introducir la contraseña",
-    "passwordInput": "introducir la contraseña"
+    "passwordInput": "Introducir la contraseña"
 
   },
   "signUp": {
